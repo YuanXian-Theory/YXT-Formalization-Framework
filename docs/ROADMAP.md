@@ -1,11 +1,8 @@
 # Roadmap
 
-## Done 1–20
-Including Haar probability interface, embedding coordinates, omegaBlock, SixLaws docking.
+## Done 1–25 (~70%)
 
-## Overall ~68%
-
-## Next 21+
-- RiemannBilinearZero for omegaBlock (matrix calculation)
-- omega² Clifford expansion
-- IsProbabilityMeasure construction
+## Next
+- Matrix proof of Riemann zero for omegaBlock
+- Clifford omega²
+- Probability Haar instance

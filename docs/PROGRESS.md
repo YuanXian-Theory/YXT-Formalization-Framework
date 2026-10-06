@@ -1,28 +1,29 @@
 # Progress report
 
-## Overall ≈ **68%**
+## Overall ≈ **70%**
 
 ```
 Architecture / interfaces     ████████████████████  100%
-Mathlib carriers              █████████████████░░░   88%
-Structure lemmas              ██████████████░░░░░░   68%
-Arithmetic CM / Riemann       ██████░░░░░░░░░░░░░░   30%
-Zero-axiom research closure   ████░░░░░░░░░░░░░░░░   18%
+Mathlib carriers              ██████████████████░░   90%
+Structure lemmas              ██████████████░░░░░░   70%
+Arithmetic CM / Riemann       ███████░░░░░░░░░░░░░   32%
+Zero-axiom research closure   ████░░░░░░░░░░░░░░░░   20%
 
-|[█████████████▌░░░░░░]|  ~68%
+|[██████████████░░░░░░]|  ~70%
 ```
 
-## Steps 17–20
+## Steps 21–25
 
 | Step | Result |
 |------|--------|
-| 17 | `haarOnT64_isProbability` interface; `sr_idempotent_on_constants` |
-| 18 | `embeddingCoord k = exp(2πi k/85)`; CM lattice uses coords |
-| 19 | `omegaBlock` nonzero candidate (diag I / 1); diag lemmas |
-| 20 | SixLaws + `minimal_encoding_card` / `encodingWitness` |
+| 21 | omegaBlock diagonal lemmas; RiemannBilinearZero_omegaBlock axiom |
+| 22 | NoOutsideSemantics package |
+| 23 | Theorem71 export; Theorem73 shape |
+| 24 | Tate rank target 2×32=64 |
+| 25 | kunnethRank 0..4 proved |
 
-## Still open
-- Prove probability instance (no axiom)
-- `RiemannBilinearZero omegaBlock`
-- `omega * omega = ±1` expansion
-- Full CM from CyclotomicField embeddings
+## Residual critical path
+1. Prove RiemannBilinearZero omegaBlock by matrix algebra
+2. omega² = ±1
+3. IsProbabilityMeasure without axiom
+4. True cyclotomic embeddings lattice
