@@ -1,14 +1,11 @@
 # Roadmap
 
-## Done 1–16
-- Carriers, Haar, quotient, span, MindField, FourLayer
-- **13** omega product + omega_sq shape
-- **14** `galois_units_card_64` proved
-- **15** sr const-mean lemmas
-- **16** Riemann zero matrix theorem
+## Done 1–20
+Including Haar probability interface, embedding coordinates, omegaBlock, SixLaws docking.
 
-## Overall ~65% (see PROGRESS.md)
+## Overall ~68%
 
-## Next
-- Haar probability instance → idempotence
-- True CM lattice / nonzero Ω
+## Next 21+
+- RiemannBilinearZero for omegaBlock (matrix calculation)
+- omega² Clifford expansion
+- IsProbabilityMeasure construction

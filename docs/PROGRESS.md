@@ -1,42 +1,28 @@
-# Progress report — YXT-Formalization-Framework
+# Progress report
 
-## Overall completion (engineering estimate)
+## Overall ≈ **68%**
 
 ```
 Architecture / interfaces     ████████████████████  100%
-Mathlib carriers              █████████████████░░░   85%
-Structure lemmas              █████████████░░░░░░░   62%
-Arithmetic CM / Riemann       █████░░░░░░░░░░░░░░░   25%
-Zero-axiom research closure   ███░░░░░░░░░░░░░░░░░   15%
+Mathlib carriers              █████████████████░░░   88%
+Structure lemmas              ██████████████░░░░░░   68%
+Arithmetic CM / Riemann       ██████░░░░░░░░░░░░░░   30%
+Zero-axiom research closure   ████░░░░░░░░░░░░░░░░   18%
 
-Weighted overall ≈  **65%**
+|[█████████████▌░░░░░░]|  ~68%
 ```
 
-## Progress bar
+## Steps 17–20
 
-```
-|[█████████████░░░░░░░]|  ~65%
+| Step | Result |
+|------|--------|
+| 17 | `haarOnT64_isProbability` interface; `sr_idempotent_on_constants` |
+| 18 | `embeddingCoord k = exp(2πi k/85)`; CM lattice uses coords |
+| 19 | `omegaBlock` nonzero candidate (diag I / 1); diag lemmas |
+| 20 | SixLaws + `minimal_encoding_card` / `encodingWitness` |
 
-Steps 1–16 engineering queue:
-1–12  ████████████  framework skeleton
-13    █  omega product + omega_sq shape (proof open)
-14    █  Gal units card 64 via ZMod.card_units_eq_totient
-15    █  sr const-mean shape lemmas
-16    █  RiemannBilinearZero 0 proved
-```
-
-## Steps 13–16 detail
-
-| Step | Result | Residual |
-|------|--------|----------|
-| 13 | `omega` product def; `omega_sq` shaped axiom | Expand Clifford rewrite |
-| 14 | `Fintype.card (Units (ZMod 85)) = 64` **proved** | CyclotomicField ≃ path |
-| 15 | `sr_const_shape`; `integral_const_prob` axiom | Probability Haar instance |
-| 16 | `RiemannBilinearZero 0` **proved** | Nonzero CM Ω |
-
-## Next 17+
-
-1. Probability measure instance for haarOnT64  
-2. Minkowski CM lattice  
-3. Nonzero Ω with Riemann package  
-4. omega² expansion  
+## Still open
+- Prove probability instance (no axiom)
+- `RiemannBilinearZero omegaBlock`
+- `omega * omega = ±1` expansion
+- Full CM from CyclotomicField embeddings

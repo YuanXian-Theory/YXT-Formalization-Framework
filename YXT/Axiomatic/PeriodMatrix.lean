@@ -1,5 +1,5 @@
 /-!
-# Period matrix — step 16: Riemann zero on zero matrix
+# Period matrix — steps 16, 18–19: embedding coords + block Ω
 -/
 
 import Mathlib.Data.Complex.Basic
@@ -16,13 +16,17 @@ abbrev CMTypeChoice : Type := Fin 32 → EmbeddingIndex
 def formalCMType : CMTypeChoice :=
   fun i =&gt; ⟨(i : ℕ), by omega⟩
 
+/-- Formal complex coordinate attached to embedding index k (placeholder root of unity scale). -/
+noncomputable def embeddingCoord (k : EmbeddingIndex) : ℂ :=
+  Complex.exp (2 * Real.pi * Complex.I * (k.val : ℂ) / 85)
+
 noncomputable def standardLattice : LatticeBasis32 :=
   fun j i =&gt; if i = j then (1 : ℂ) else 0
 
+/-- Lattice from CM type using embedding coordinates on the diagonal blocks. -/
 noncomputable def cmLatticeFromType (τ : CMTypeChoice) : LatticeBasis32 :=
   fun j i =&gt;
-    let e := (τ j : ℕ) % 32
-    if (i : ℕ) = e then (1 : ℂ) else 0
+    if i = j then embeddingCoord (τ j) else 0
 
 noncomputable def cmLatticeFormal : LatticeBasis32 := cmLatticeFromType formalCMType
 
@@ -40,10 +44,25 @@ noncomputable def symplecticJ : Matrix (Fin 32) (Fin 32) ℂ :=
 def RiemannBilinearZero (Ω : PeriodMatrix) : Prop :=
   Ω.transpose * symplecticJ * Ω = 0
 
-/-- Zero matrix satisfies Riemann bilinear zero relation. -/
 theorem RiemannBilinearZero_zero :
     RiemannBilinearZero (0 : PeriodMatrix) := by
   simp [RiemannBilinearZero]
+
+/-- Block-diagonal period candidate: diag(τ I₁₆, I₁₆) with τ = i (formal). -/
+noncomputable def omegaBlock : PeriodMatrix :=
+  Matrix.of fun i j =&gt;
+    if i = j then
+      if (i : ℕ) &lt; 16 then Complex.I else (1 : ℂ)
+    else 0
+
+theorem omegaBlock_diag_I (i : Fin 32) (hi : (i : ℕ) &lt; 16) :
+    omegaBlock i i = Complex.I := by
+  simp [omegaBlock, Matrix.of_apply, hi]
+
+theorem omegaBlock_diag_one (i : Fin 32) (hi : 16 ≤ (i : ℕ)) :
+    omegaBlock i i = 1 := by
+  simp [omegaBlock, Matrix.of_apply]
+  intro h; omega
 
 axiom RiemannBilinearPos : PeriodMatrix → Prop
 
@@ -57,14 +76,9 @@ structure PolarizedLattice where
   lattice : LatticeBasis32
   polarized : IsPrincipallyPolarized lattice
 
-noncomputable def omegaCandidate : PeriodMatrix :=
-  Matrix.of fun i j =&gt; if i = j then (1 : ℂ) else 0
+noncomputable def omegaCandidate : PeriodMatrix := omegaBlock
 
 noncomputable def periodMapStandard : PeriodMatrix := omegaCandidate
-
-theorem omegaCandidate_diagonal_one (i : Fin 32) :
-    omegaCandidate i i = 1 := by
-  simp [omegaCandidate, Matrix.of_apply]
 
 noncomputable def periodMap (_L : LatticeBasis32) : PeriodMatrix := periodMapStandard
 
@@ -82,5 +96,8 @@ axiom exists_period_matrix_Riemann :
 
 noncomputable def periodFromCMType (τ : CMTypeChoice) : PeriodMatrix :=
   periodMap (cmLatticeFromType τ)
+
+theorem embeddingCoord_85 (k : EmbeddingIndex) :
+    embeddingCoord k = Complex.exp (2 * Real.pi * Complex.I * (k.val : ℂ) / 85) := rfl
 
 end YXT.Axiomatic

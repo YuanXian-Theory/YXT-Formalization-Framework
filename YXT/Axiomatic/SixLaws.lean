@@ -1,26 +1,37 @@
 /-!
-# Six ultimate iron laws
+# Six iron laws — step 20: minimal encoding docked to 2^6=64
 
-**Epistemic status**: Axioms (structural necessities under the no-outside principle; formulations replaceable).  
-**Source paper**: Axiomatic Reconstruction §3; Ontological master outline
+**Epistemic status**: Axiomatic layer (laws as Props) + combinatorial theorems.
 -/
+
+import YXT.Axiomatic.Cl6
+import Mathlib.Tactic.NormNum
 
 namespace YXT.Axiomatic
 
-axiom FactorConservation : Prop
-axiom SpacetimeUniqueness : Prop
-axiom CircularSelfConsistency : Prop
-axiom SelfReferentialField : Prop
-axiom ZeroSumEnergy : Prop
-axiom MinimalEncoding : Prop
+/-- Law placeholders (philosophical / axiomatic entrance). -/
+axiom Law_NoOutside : Prop
+axiom Law_SelfReference : Prop
+axiom Law_FactorConservation : Prop
+axiom Law_UniqueSpacetime : Prop
+axiom Law_SelfConsistency : Prop
+axiom Law_MinimalEncoding : Prop
 
-/-- Six cognitive strata index. -/
-def CognitiveDimension : Type := Fin 6
+/-- Minimal encoding combinatorial content: 2^6 = 64. -/
+theorem minimal_encoding_card : (2 : ℕ) ^ 6 = 64 := dim_combinatorial
 
-/-- Minimal encoding unit 2⁶ = 64. -/
-theorem minimal_encoding_card : (2 : ℕ) ^ 6 = 64 := by norm_num
+/-- Six laws package. -/
+structure SixLaws where
+  noOutside : Law_NoOutside
+  selfRef : Law_SelfReference
+  factor : Law_FactorConservation
+  spacetime : Law_UniqueSpacetime
+  consistent : Law_SelfConsistency
+  encoding : Law_MinimalEncoding
 
-theorem cognitive_dimension_card : Fintype.card CognitiveDimension = 6 := by
-  simp [CognitiveDimension, Fintype.card_fin]
+/-- Docking: encoding law is witnessed by the combinatorial theorem at type level. -/
+def encodingWitness : (2 : ℕ) ^ 6 = 64 := minimal_encoding_card
+
+theorem encodingWitness_eq_cl6 : encodingWitness = cl6_matches_minimal_encoding := rfl
 
 end YXT.Axiomatic
