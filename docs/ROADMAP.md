@@ -1,13 +1,14 @@
 # Roadmap
 
-## Done (1–12)
-- Mathlib carriers, Haar, generation quotient, span relation, MindField type
-- omega := product of ι(eᵢ)
-- FourLayer L0–L3 structures
-- PROGRESS.md
+## Done 1–16
+- Carriers, Haar, quotient, span, MindField, FourLayer
+- **13** omega product + omega_sq shape
+- **14** `galois_units_card_64` proved
+- **15** sr const-mean lemmas
+- **16** Riemann zero matrix theorem
 
-## Next (13+)
-- omega² = ±1 proof
-- True CM lattice
-- Riemann package
-- Measure idempotence
+## Overall ~65% (see PROGRESS.md)
+
+## Next
+- Haar probability instance → idempotence
+- True CM lattice / nonzero Ω

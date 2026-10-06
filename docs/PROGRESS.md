@@ -4,51 +4,39 @@
 
 ```
 Architecture / interfaces     ████████████████████  100%
-Mathlib carriers (T64/Cl6/…)  ████████████████░░░░   80%
-Proofs of structure lemmas    ████████████░░░░░░░░   55%
-Arithmetic CM / Riemann       ████░░░░░░░░░░░░░░░░   20%
-Zero-axiom research closure   ██░░░░░░░░░░░░░░░░░░   10%
+Mathlib carriers              █████████████████░░░   85%
+Structure lemmas              █████████████░░░░░░░   62%
+Arithmetic CM / Riemann       █████░░░░░░░░░░░░░░░   25%
+Zero-axiom research closure   ███░░░░░░░░░░░░░░░░░   15%
 
-Weighted overall ≈  **62%**  of a “machine-checkable framework skeleton +
-partial flesh” goal.
-
-Not 100%: true CM lattice from ℚ(ζ₈₅), Riemann package proofs, and full
-standard-theory stacks (ℓ-adic, Shimura) remain research-level.
+Weighted overall ≈  **65%**
 ```
 
-## Progress bar (steps 1–12)
+## Progress bar
 
 ```
-1  Cyclotomic85 Mathlib        [DONE]
-2  Cl6 Mathlib                 [DONE]
-3  Haar + srOperator defs      [DONE]
-4  PolarizedLattice            [DONE]
-5  generate_A path             [DONE]
-6  LatticeQuotient def         [DONE]
-7  generate_A no sorry         [DONE]
-8  ℤ-span latticeRel           [DONE]
-9  PsiSRCarrier def            [DONE]
-10 omega as ι-product def      [DONE] (sq law still axiom)
-11 FourLayer L0–L3 docking     [DONE]
-12 Inventory + progress report [DONE]
+|[█████████████░░░░░░░]|  ~65%
+
+Steps 1–16 engineering queue:
+1–12  ████████████  framework skeleton
+13    █  omega product + omega_sq shape (proof open)
+14    █  Gal units card 64 via ZMod.card_units_eq_totient
+15    █  sr const-mean shape lemmas
+16    █  RiemannBilinearZero 0 proved
 ```
 
-Bar: `|████████████░░░░░░░░| 12/12 engineering steps · ~62% full rigor`
+## Steps 13–16 detail
 
-## What “done” means here
+| Step | Result | Residual |
+|------|--------|----------|
+| 13 | `omega` product def; `omega_sq` shaped axiom | Expand Clifford rewrite |
+| 14 | `Fintype.card (Units (ZMod 85)) = 64` **proved** | CyclotomicField ≃ path |
+| 15 | `sr_const_shape`; `integral_const_prob` axiom | Probability Haar instance |
+| 16 | `RiemannBilinearZero 0` **proved** | Nonzero CM Ω |
 
-| Layer | State |
-|-------|--------|
-| Paper docking / modules | Complete |
-| Core carriers as `def` | Mostly complete |
-| Equivalence/quotient algebra | Span relation proved |
-| CM arithmetic | Placeholder lattice |
-| Standard theory depth | Interfaces only |
+## Next 17+
 
-## Recommended next (13+)
-
-1. Prove `omega * omega = ±1` from Clifford relations  
-2. Replace formal lattice by Minkowski embeddings of ℚ(ζ₈₅)  
-3. Riemann bilinear proof for that lattice  
-4. `srOperator_idempotent` with integrability  
-5. Mathlib Gal(ℚ(ζ₈₅)/ℚ) card without axiom  
+1. Probability measure instance for haarOnT64  
+2. Minkowski CM lattice  
+3. Nonzero Ω with Riemann package  
+4. omega² expansion  

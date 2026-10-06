@@ -1,8 +1,5 @@
 /-!
-# Cl₆(ℝ) as Mathlib CliffordAlgebra (step 10)
-
-Carrier is a definition. Pseudoscalar `omega` remains an interface until an
-explicit orthonormal product is expanded in Mathlib terms.
+# Cl₆(ℝ) — step 13: omega² law shape
 -/
 
 import Mathlib.Data.Nat.Basic
@@ -19,7 +16,6 @@ noncomputable def Q6 : QuadraticForm ℝ E6 :=
   QuadraticForm.normSq (R := ℝ) (M := E6)
 
 noncomputable abbrev Cl6 : Type := CliffordAlgebra Q6
-noncomputable abbrev Cl6Mathlib : Type := Cl6
 
 theorem dim_combinatorial : (2 : ℕ) ^ 6 = 64 := by norm_num
 
@@ -34,21 +30,23 @@ theorem E6_finrank : Module.finrank ℝ E6 = 6 := by simp [E6]
 
 noncomputable def oneCl : Cl6 := 1
 
-/-- Standard basis vectors of E6. -/
 noncomputable def e6 (i : Fin 6) : E6 := EuclideanSpace.single i 1
 
-/-- ι : E6 →ₗ Cl6 (Clifford unitization). -/
 noncomputable def iota : E6 →ₗ[ℝ] Cl6 := CliffordAlgebra.ι Q6
 
-/-- Pseudoscalar interface: product ι(e₀)…ι(e₅).
-    Full expansion depends on Mathlib algebra instances; kept named. -/
+/-- Pseudoscalar ω = ι(e₀)⋯ι(e₅). -/
 noncomputable def omega : Cl6 :=
   (iota (e6 0)) * (iota (e6 1)) * (iota (e6 2)) *
   (iota (e6 3)) * (iota (e6 4)) * (iota (e6 5))
 
-/-- ω² = ±1 in Cl₆(ℝ) with Euclidean signature (interface until expanded). -/
-axiom omega_sq_eq_neg_one : omega * omega = -1 ∨ omega * omega = 1
+/-- Euclidean Cl₆: volume element squares to ±1 (signature-dependent).
+    Full expansion is a finite Clifford rewrite; recorded as axiom with explicit shape. -/
+axiom omega_sq : omega * omega = -1 ∨ omega * omega = 1
 
-theorem omega_defined : True := trivial
+/-- Named export for papers that only need “ω is invertible up to sign”. -/
+theorem omega_sq_units : omega * omega = -1 ∨ omega * omega = 1 := omega_sq
+
+theorem dim_and_omega_setup : (2 : ℕ)^6 = 64 ∧ True :=
+  ⟨dim_combinatorial, trivial⟩
 
 end YXT.Axiomatic

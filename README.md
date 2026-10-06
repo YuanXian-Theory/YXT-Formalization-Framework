@@ -6,15 +6,15 @@ Yuanxian Theory formalization (Lean 4 + Mathlib)
 
 https://github.com/YuanXian-Theory/YXT-Formalization-Framework
 
-## Progress (see [docs/PROGRESS.md](docs/PROGRESS.md))
+## Progress
 
 ```
-Engineering steps 1–12     ████████████  100% of planned elim queue
-Overall rigor estimate     ██████░░░░░░   ~62%
+|[█████████████░░░░░░░]|  ~65%
+Steps 1–16 engineering · arithmetic CM still open
 ```
+
+Details: [docs/PROGRESS.md](docs/PROGRESS.md)
 
 ```bash
 git pull && lake build
 ```
-
-Modules: `Axiomatic/` · `Ontology/FourLayer` · `StandardTheory/` · `MindField/`

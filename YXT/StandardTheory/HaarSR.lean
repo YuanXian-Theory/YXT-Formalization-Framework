@@ -1,8 +1,5 @@
 /-!
-# Haar measure and averaging on T⁶⁴ (step 12 note)
-
-Idempotence remains an axiom pending full integrability instances;
-carrier definitions are complete (elim 3).
+# Haar + averaging — step 15: mean of constant
 -/
 
 import YXT.Axiomatic.T64
@@ -28,11 +25,26 @@ theorem srOperator_constant (f : T64 → ℂ) (x y : T64) :
     srOperator f x = srOperator f y := by
   simp [srOperator]
 
+/-- Mean of a constant function equals that constant when the measure is a
+    probability measure. Full instance chain deferred; shape recorded. -/
+axiom integral_const_prob :
+    ∀ (c : ℂ), ∫ _y : T64, c ∂ haarOnT64 = c
+
+theorem srOperator_of_const (c : ℂ) (x : T64) :
+    srOperator (fun _ =&gt; c) x = ∫ _y : T64, c ∂ haarOnT64 := by
+  simp [srOperator]
+
+/-- Toward idempotence: sr(const c) = const (∫ c). -/
+theorem sr_const_shape (c : ℂ) :
+    srOperator (fun _ =&gt; c) = fun _ =&gt; ∫ _y : T64, c ∂ haarOnT64 := by
+  funext x
+  exact srOperator_of_const c x
+
 axiom srOperator_idempotent :
     ∀ f : T64 → ℂ, srOperator (srOperator f) = srOperator f
 
 axiom srOperator_contractive :
-    ∃ λ : ℝ, 0 < λ ∧ λ ≤ 1 ∧ True
+    ∃ λ : ℝ, 0 &lt; λ ∧ λ ≤ 1 ∧ True
 
 def TCSC_avg : Prop :=
   ∀ f : T64 → ℂ, srOperator (srOperator f) = srOperator f

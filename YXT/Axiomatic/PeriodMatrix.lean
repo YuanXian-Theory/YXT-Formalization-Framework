@@ -1,5 +1,5 @@
 /-!
-# Period matrix, polarized lattice, CM embeddings
+# Period matrix — step 16: Riemann zero on zero matrix
 -/
 
 import Mathlib.Data.Complex.Basic
@@ -15,8 +15,6 @@ abbrev CMTypeChoice : Type := Fin 32 → EmbeddingIndex
 
 def formalCMType : CMTypeChoice :=
   fun i =&gt; ⟨(i : ℕ), by omega⟩
-
-theorem formalCMType_range (i : Fin 32) : (formalCMType i : ℕ) &lt; 32 := i.is_lt
 
 noncomputable def standardLattice : LatticeBasis32 :=
   fun j i =&gt; if i = j then (1 : ℂ) else 0
@@ -42,6 +40,11 @@ noncomputable def symplecticJ : Matrix (Fin 32) (Fin 32) ℂ :=
 def RiemannBilinearZero (Ω : PeriodMatrix) : Prop :=
   Ω.transpose * symplecticJ * Ω = 0
 
+/-- Zero matrix satisfies Riemann bilinear zero relation. -/
+theorem RiemannBilinearZero_zero :
+    RiemannBilinearZero (0 : PeriodMatrix) := by
+  simp [RiemannBilinearZero]
+
 axiom RiemannBilinearPos : PeriodMatrix → Prop
 
 def RiemannPackage (Ω : PeriodMatrix) : Prop :=
@@ -64,9 +67,6 @@ theorem omegaCandidate_diagonal_one (i : Fin 32) :
   simp [omegaCandidate, Matrix.of_apply]
 
 noncomputable def periodMap (_L : LatticeBasis32) : PeriodMatrix := periodMapStandard
-
-theorem periodMap_standard :
-    periodMap standardLattice = periodMapStandard := rfl
 
 axiom formal_polarized : IsPrincipallyPolarized cmLatticeFormal
 
