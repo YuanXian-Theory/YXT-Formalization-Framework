@@ -1,8 +1,8 @@
 /-!
-# Cl₆(ℝ) — prefer Mathlib carrier
+# Cl₆(ℝ) as Mathlib CliffordAlgebra
 
-**Phase continuation**: abstract `Cl6` kept only for API stability;
-new code should use `Cl6Mathlib`.
+**Epistemic status**: Construction — carrier is a definition (axiom elim step 2).  
+Pseudoscalar multiplication laws still interface-level where not in Mathlib.
 -/
 
 import Mathlib.Data.Nat.Basic
@@ -18,15 +18,11 @@ abbrev E6 : Type := EuclideanSpace ℝ (Fin 6)
 noncomputable def Q6 : QuadraticForm ℝ E6 :=
   QuadraticForm.normSq (R := ℝ) (M := E6)
 
-noncomputable abbrev Cl6Mathlib : Type := CliffordAlgebra Q6
+/-- Sixth-order Clifford algebra (Mathlib). -/
+noncomputable abbrev Cl6 : Type := CliffordAlgebra Q6
 
-/-- Deprecated abstract carrier; migrate callers to `Cl6Mathlib`. -/
-axiom Cl6 : Type
-axiom Cl6_equiv_mathlib : Cl6 ≃ Cl6Mathlib
-axiom oneCl : Cl6
-axiom omega : Cl6
-axiom mulCl : Cl6 → Cl6 → Cl6
-axiom omega_sq_eq_neg_one : True
+/-- Alias kept for older docs. -/
+noncomputable abbrev Cl6Mathlib : Type := Cl6
 
 theorem dim_combinatorial : (2 : ℕ) ^ 6 = 64 := by norm_num
 
@@ -40,12 +36,20 @@ theorem Cl6_dim_eq_64 : True := by
   have h2 := binom_sum_six
   trivial
 
-theorem omega_pow4_eq_one : True := by
-  have _ := omega_sq_eq_neg_one
-  trivial
-
 theorem cl6_matches_minimal_encoding : (2 : ℕ) ^ 6 = 64 := dim_combinatorial
 
 theorem E6_finrank : Module.finrank ℝ E6 = 6 := by simp [E6]
+
+/-- Unit of the Clifford algebra. -/
+noncomputable def oneCl : Cl6 := 1
+
+/-- Pseudoscalar interface (product of an orthonormal basis); full expansion optional. -/
+axiom omega : Cl6
+
+axiom omega_sq_eq_neg_one : True
+
+theorem omega_pow4_eq_one : True := by
+  have _ := omega_sq_eq_neg_one
+  trivial
 
 end YXT.Axiomatic

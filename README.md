@@ -6,13 +6,20 @@ Yuanxian Theory formalization (Lean 4 + Mathlib)
 
 https://github.com/YuanXian-Theory/YXT-Formalization-Framework
 
-## Status
+## Carriers (no longer abstract axioms)
 
-Interface stack for axiomatic / standard-theory / mind-field layers is in place.  
-Remaining work is **axiom elimination** (see [docs/AXIOM_INVENTORY.md](docs/AXIOM_INVENTORY.md)).
+| Object | Definition |
+|--------|------------|
+| `Cl6` | `CliffordAlgebra (normSq on EuclideanSpace ℝ (Fin 6))` |
+| `Cyclotomic85` | `CyclotomicField 85 ℚ` |
+| `T64` | `Fin 64 → AddCircle 1` |
+
+## Build
 
 ```bash
-git pull && lake build
+git pull && lake exe cache get && lake build
 ```
 
-Import `YXT.MindField.PsiSR` (not HeartField).
+[ROADMAP](docs/ROADMAP.md) · [AXIOM_INVENTORY](docs/AXIOM_INVENTORY.md)
+
+Import `YXT.MindField.PsiSR` only (not HeartField).

@@ -1,22 +1,18 @@
 /-!
-# ℚ(ζ₈₅) — migrate toward Mathlib-only carrier
+# ℚ(ζ₈₅) as Mathlib CyclotomicField
+
+**Epistemic status**: Cited standard theory — carrier is a definition (axiom elim step 1).
 -/
 
 import Mathlib.NumberTheory.Cyclotomic.Basic
 
 namespace YXT.StandardTheory
 
-noncomputable abbrev Cyclotomic85Mathlib : Type :=
-  CyclotomicField 85 ℚ
+/-- Cyclotomic field ℚ(ζ₈₅). -/
+noncomputable abbrev Cyclotomic85 : Type := CyclotomicField 85 ℚ
 
-/-- Preferred name for new code (Mathlib). -/
-noncomputable abbrev Cyclotomic85Preferred : Type := Cyclotomic85Mathlib
-
-axiom Cyclotomic85 : Type
-axiom Cyclotomic85_field : Field Cyclotomic85
-axiom Cyclotomic85_equiv_mathlib : Cyclotomic85 ≃ Cyclotomic85Mathlib
-axiom Cyclotomic85_Galois : Type
-axiom Cyclotomic85_Galois_fintype : Fintype Cyclotomic85_Galois
+noncomputable abbrev Cyclotomic85Mathlib : Type := Cyclotomic85
+noncomputable abbrev Cyclotomic85Preferred : Type := Cyclotomic85
 
 theorem totient_85 : Nat.totient 85 = 64 := by native_decide
 theorem embedding_count_target : Nat.totient 85 = 64 := totient_85
@@ -28,13 +24,12 @@ theorem cmType_half_of_embeddings : 2 * cmTypeCardinality = Nat.totient 85 := by
 
 theorem galois_order_target : Nat.totient 85 = 64 := totient_85
 
-axiom Cyclotomic85_Galois_card :
-    Fintype.card Cyclotomic85_Galois = Nat.totient 85
+/-- Galois group as units of ZMod 85 (standard isomorphism target). -/
+noncomputable abbrev Cyclotomic85_GaloisUnits : Type := Units (ZMod 85)
 
-theorem Cyclotomic85_Galois_card_64 :
-    Fintype.card Cyclotomic85_Galois = 64 := by
-  rw [Cyclotomic85_Galois_card, totient_85]
+theorem units_zmod85_card_target : Nat.totient 85 = 64 := totient_85
 
+/-- Prime decomposition behaviour in the cyclotomic field (number-theory interface). -/
 axiom CyclotomicPrimeDecomposition : Nat → Cyclotomic85 → Prop
 
 axiom prime_decomposition_exists :

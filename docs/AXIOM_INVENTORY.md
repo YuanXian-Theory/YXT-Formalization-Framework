@@ -1,47 +1,41 @@
 # Remaining axiom inventory
 
-Goal: shrink this list by replacing `axiom` with `def`/`theorem` or Mathlib citations.
+## Eliminated
 
-## Axiomatic / construction
+| Item | Status |
+|------|--------|
+| Abstract `Cyclotomic85` + equiv | **Done** — `abbrev Cyclotomic85 := CyclotomicField 85 ℚ` |
+| Abstract `Cl6` + equiv | **Done** — `abbrev Cl6 := CliffordAlgebra Q6` |
+| `oneCl` | **Done** — `def oneCl := 1` |
+| Old Galois axiom card chain | Replaced by `Units (ZMod 85)` target + totient theorems |
 
-| Axiom | Module | Elimination strategy |
-|-------|--------|----------------------|
-| `Cl6`, `oneCl`, `omega`, `mulCl` | Cl6 | Use only `Cl6Mathlib`; drop abstract carrier |
-| `Cl6_equiv_mathlib` | Cl6 | Becomes `Equiv.refl` once Cl6 := Cl6Mathlib |
-| `NoOutside`, `CosmosCarrier`, … | NoOutside | Keep as philosophical axioms or encode as structure |
-| Six law `Prop` axioms | SixLaws | Keep as axiom layer (by design) |
-| `step_elimination_condition` | Reduction35 | Port from 35-step machine proof |
-| `RiemannBilinearPos` | PeriodMatrix | Hermitian form on H¹ |
-| `IsPrincipallyPolarized` | PeriodMatrix | Define via Riemann form |
-| `periodMap` | PeriodMatrix | Integrate holomorphic 1-forms on lattice |
-| `CMAbelian32`, `generate_A` | GenerateA | Quotient ℂ³²/Λ for explicit Λ |
-| `generate_A_induces_period` | GenerateA | Follows from periodMap_riemann once polarized |
-| Pipeline equality axioms | GenerateA | Definitional once generate_A is a def |
+## Still present
 
-## Standard theory
+### Axiomatic
+| Axiom | Module | Next step |
+|-------|--------|-----------|
+| `omega`, `omega_sq_eq_neg_one` | Cl6 | Express as Clifford product of basis |
+| `NoOutside` package | NoOutside | Philosophical layer (optional keep) |
+| Six law Props | SixLaws | By design |
+| `step_elimination_condition` | Reduction35 | Port machine proof |
+| `RiemannBilinearPos`, polarization, `periodMap` | PeriodMatrix | AG construction |
+| `CMAbelian32`, `generate_A`, pipeline axioms | GenerateA | Quotient by lattice |
 
-| Axiom | Module | Strategy |
-|-------|--------|----------|
-| `Cyclotomic85` + equiv | Cyclotomic85 | `abbrev Cyclotomic85 := Cyclotomic85Mathlib` |
-| `Cyclotomic85_Galois` + card | Cyclotomic85 | Mathlib `galCyclotomicEquivUnits` / card lemmas |
-| `CyclotomicPrimeDecomposition` | Cyclotomic85 | Mathlib factorization in cyclotomic extensions |
-| `H_half`, `Delta_half`, spectrum | HilbertSpectrum | InnerProductSpace + IsSelfAdjoint |
-| `haarOnT64`, `srOperator` | HaarSR | Mathlib Haar on compact groups |
-| `TateModule`, `FrobeniusAction` | EllAdic | Mathlib/ FLT libraries when available |
-| `CMTypeOf`, `PrincipalPolarization`, `shimura_taniyama` | CMAbelian | Algebraic geometry stack |
-| `ComplexTorus`, `Hk`, `kunneth_rank_module` | ComplexTorus | Mathlib torus cohomology |
-| `spectral_matching_interface` | SpectralMatching | Follows from Euler ↔ spectrum once both defined |
+### Standard theory
+| Axiom | Module | Next step |
+|-------|--------|-----------|
+| `CyclotomicPrimeDecomposition` | Cyclotomic85 | Mathlib factorization |
+| Hilbert spectrum carriers | HilbertSpectrum | InnerProductSpace |
+| Haar / srOperator | HaarSR | Mathlib Haar |
+| Tate / Frobenius / Euler | EllAdic | ℓ-adic stack |
+| CM polarization / Shimura | CMAbelian | AG |
+| ComplexTorus / Hk | ComplexTorus | Mathlib |
+| spectral_matching | SpectralMatching | After spectrum+Euler |
 
-## MindField
+### MindField
+| `PsiSRCarrier`, `FixedPointEq` | Define on function space on T64 |
 
-| Axiom | Strategy |
-|-------|----------|
-| `PsiSRCarrier`, `FixedPointEq` | Define on C(T64, ℂ) with srOperator |
-
-## Elimination order (recommended)
-
-1. `Cyclotomic85 := CyclotomicField 85 ℚ` (low risk)
-2. `Cl6 := Cl6Mathlib` (low risk once QuadraticForm instances OK)
-3. Haar on T64 (medium)
-4. periodMap + polarized lattice (high — research level)
-5. generate_A as quotient (depends on 4)
+## Queue
+3. Haar on T64  
+4. Polarized CM lattice + Riemann  
+5. generate_A as ℂ³²/Λ  
