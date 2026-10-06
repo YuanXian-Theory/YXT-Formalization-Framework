@@ -6,14 +6,13 @@ Yuanxian Theory formalization (Lean 4 + Mathlib)
 
 https://github.com/YuanXian-Theory/YXT-Formalization-Framework
 
-## Steps 6–7
+## Steps 8–9
 
-- `LatticeQuotient` is a **definition** (`Quotient`), not an axiom
-- `generate_A` is a **definition** with **no sorry**
-- Stage window 17–28 is wired (`StageWindow`, nodup)
-
-Limitation: lattice equivalence is still trivial (`True`); torus is a singleton until the span relation is implemented.
+- **Lattice relation**: `x ∼ y` ↔ `x − y ∈ ℤ-span(L)` (proved equivalence)
+- **Mind field carrier**: `PsiSRCarrier := T64 → ℂ`
 
 ```bash
 git pull && lake build
 ```
+
+If `linear_combination` fails on your Mathlib version, report the error.

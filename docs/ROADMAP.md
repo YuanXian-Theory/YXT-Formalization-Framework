@@ -1,11 +1,11 @@
 # Roadmap
 
 ## Done
-- [x] Elim 1–5
-- [x] **6**: `LatticeQuotient L := Quotient (latticeSetoid L)` + `Nonempty` instance
-- [x] **7**: `generate_A` pure `def` (no sorry); `StageWindow`; `stagesForGenerateA_nodup`
+- [x] Elim 1–7
+- [x] **8**: `inSpan`, non-trivial `latticeRel`, Setoid proofs, `quotient_latticePoint_eq_zero`
+- [x] **9**: `PsiSRCarrier := T64 → ℂ`, `FixedPointEq` as def
 
-## Next residual
-- Replace trivial `latticeRel` by difference-in-span
-- True CM lattice from embeddings of ℚ(ζ₈₅)
+## Residual
+- Non-degenerate CM basis (Minkowski embeddings)
 - Riemann package proofs
+- Measure-theoretic idempotence of srOperator

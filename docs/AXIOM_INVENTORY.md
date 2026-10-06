@@ -1,27 +1,24 @@
 # Axiom inventory
 
-## Eliminated (1–7)
+## Eliminated (1–9)
 
 | Step | Item |
 |------|------|
-| 1 | Cyclotomic85 := CyclotomicField 85 ℚ |
-| 2 | Cl6 := CliffordAlgebra Q6 |
-| 3 | haarOnT64, srOperator defs |
-| 4 | PolarizedLattice structure |
-| 5 | CMAbelian32 type-level generation |
-| **6** | **LatticeQuotient := Quotient (latticeSetoid L)** |
-| **7** | **generate_A def, no sorry; StageWindow; stages nodup** |
+| 1–2 | Cyclotomic85, Cl6 Mathlib |
+| 3 | Haar + srOperator |
+| 4–5 | PolarizedLattice, generation path |
+| 6–7 | Quotient def, generate_A no sorry |
+| **8** | **`latticeRel` via ℤ-span; refl/symm/trans proved** |
+| **9** | **`PsiSRCarrier := T64 → ℂ`; `FixedPointEq` def** |
 
-## Still axiom / open
+## Still open
 
 | Item | Notes |
 |------|-------|
-| `latticeRel` currently `True` | Must become “difference ∈ ℤ-span(L)” with real coordinates |
-| `formal_polarized`, `RiemannBilinearPos` | Arithmetic CM |
-| `omega` (Cl6) | Basis product |
-| Hilbert / Tate / Shimura / Hk | Standard theory depth |
-| srOperator idempotent proof | Measure instances |
+| Basis may be degenerate | formal CM lattice still unit-like |
+| `formal_polarized`, Riemann positivity | arithmetic CM |
+| `omega` (Cl6) | basis product |
+| Hilbert / Tate / Shimura | depth |
+| srOperator idempotent proof | measure instances |
 
-## Meaning of steps 6–7
-
-The quotient is a real Lean `Quotient`, not an `axiom`. The equivalence is still the trivial relation (all points identified), so the torus is a singleton — honest placeholder until the ℤ-span relation is filled in.
+Step 8 makes the torus **non-trivially typed**: distinct points need not be identified unless their difference is in the span.

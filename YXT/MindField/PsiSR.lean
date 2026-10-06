@@ -1,15 +1,17 @@
 /-!
-# Self-referential mind field Ψ_SR
+# Self-referential mind field Ψ_SR (step 9)
 
 **Epistemic status**: Ontological-layer formalization.  
-**Provenance**: ZFC-Extension SRMF; Yuanxian-Consciousness Basic; Mathlib ContractingWith.  
-**Naming**: module `YXT.MindField` (English); Chinese 自指心场 maps to mind field / SRMF.
+**Step 9**: `PsiSRCarrier` is a definition — functions on T⁶⁴.
 -/
 
+import YXT.Axiomatic.T64
 import Mathlib.Topology.MetricSpace.Basic
 import Mathlib.Topology.MetricSpace.Contracting
 
 namespace YXT.MindField
+
+open YXT.Axiomatic
 
 def IsInvolution {α : Type*} (I : α → α) : Prop :=
   ∀ x, I (I x) = x
@@ -17,14 +19,12 @@ def IsInvolution {α : Type*} (I : α → α) : Prop :=
 def IsFixedPoint {α : Type*} (F : α → α) (x : α) : Prop :=
   F x = x
 
-/-- Self-referential mind field with contraction constant K &lt; 1. -/
 structure SRMF (M : Type*) [MetricSpace M] where
   psi : M → M
   K : NNReal
   hK : K &lt; 1
   contracting : ContractingWith K psi
 
-/-- Unique fixed point (Mathlib Banach / ContractingWith). -/
 theorem SRMF.has_unique_fixed_point {M : Type*} [MetricSpace M] [CompleteSpace M]
     [Nonempty M] (F : SRMF M) :
     ∃! p : M, IsFixedPoint F.psi p := by
@@ -33,14 +33,15 @@ theorem SRMF.has_unique_fixed_point {M : Type*} [MetricSpace M] [CompleteSpace M
   · intro y hy
     exact ContractingWith.fixedPoint_unique F.contracting hy
 
-/-- Abstract carrier for Ψ_SR. -/
-axiom PsiSRCarrier : Type
+/-- Mind-field carrier: complex-valued fields on T⁶⁴. -/
+abbrev PsiSRCarrier : Type := T64 → ℂ
 
-axiom FixedPointEq : (PsiSRCarrier → PsiSRCarrier) → PsiSRCarrier → Prop
+/-- Fixed-point equation for an operator on the mind field. -/
+def FixedPointEq (F : PsiSRCarrier → PsiSRCarrier) (ψ : PsiSRCarrier) : Prop :=
+  F ψ = ψ
 
 def evolve {Ψ : Type*} (I : Ψ → Ψ) (_α : ℝ) (ψ : Ψ) : Ψ := I ψ
 
-/-- On Bool⁶⁴, bit-flip involution has unique fixed point `false⁶⁴`. -/
 theorem involution_fixed_point_unique_bool (ψ : Fin 64 → Bool)
     (h : (fun i =&gt; !ψ i) = ψ) : ψ = fun _ =&gt; false := by
   funext i

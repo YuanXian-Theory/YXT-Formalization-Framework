@@ -1,14 +1,14 @@
-# generate_A steps 6–7
+# generate_A steps 8–9
 
 ```lean
-def latticeSetoid L : Setoid Complex32
+def inSpan L z := ∃ c, z = latticePoint L c
+def latticeRel L x y := inSpan L (x - y)
+-- refl / symm / trans: proved
 def LatticeQuotient L := Quotient (latticeSetoid L)
-def CMAbelian32 := LatticeQuotient cmLatticeFormal
-def generate_A _t _c := cmAbelian32_zero   -- no sorry
 ```
 
-Stages 17–28: `StageWindow`, `inGenerateAWindow`, `stagesForGenerateA_nodup`.
+Lattice points map to the zero class:
+`quotient_latticePoint_eq_zero`.
 
-**Known limitation**: `latticeRel` is currently `True` (all points equivalent),
-so the formal torus is a singleton. Replace with ℤ-span membership for a
-non-degenerate complex torus.
+Mind field (step 9):
+`PsiSRCarrier := T64 → ℂ`.
