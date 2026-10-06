@@ -2,60 +2,82 @@
 # 35-step dimensional-reduction cascade
 
 **Epistemic status**: Axiomatic construction framework + docked spectral interfaces.  
-**Provenance**:
-- YXT-Formalization `lean/Reduction/StepReduction.lean`
-- YXT-Formalization `lean/Reduction/FullReductionChain.lean`
-- Zenodo: 35-step Lean 4 machine proof (doi:10.5281/zenodo.21349286)
-
-**Principle**: Labels + spectral truncation + coupling-jump from existing Reduction module;
-cell-elimination conditions remain to be filled step-by-step from the machine proof.
+**Provenance**: YXT-Formalization `Reduction/StepReduction.lean`, `FullReductionChain.lean`
 -/
 
 import Mathlib.Data.Real.Basic
+import Mathlib.Data.Real.Sqrt
 import Mathlib.Data.Fin.Basic
 import Mathlib.Tactic.NormNum
+import Mathlib.Tactic.Linarith
+import Mathlib.Tactic.Positivity
 
 namespace YXT.Axiomatic
 
-/-- Fine-structure scale used in spectral windows (CODATA-aligned constant in engineering layers). -/
 noncomputable def alphaFSC : ℝ := 1 / 137.035999084
 
-theorem alphaFSC_pos : 0 &lt; alphaFSC := by
+theorem alphaFSC_pos : 0 < alphaFSC := by
   unfold alphaFSC
   norm_num
 
-/-- Step labels 0..34. -/
+theorem alphaFSC_lt_one : alphaFSC < 1 := by
+  unfold alphaFSC
+  norm_num
+
 inductive ReductionStep : Type where
   | step : Fin 35 → ReductionStep
   deriving Repr
 
-/-- Length-35 chain. -/
 def ReductionChain : Type := Fin 35 → ReductionStep
 
-/-- Spectral truncation window at step `n` (ported pattern from StepReduction.lean).
-    Concrete lattice sets live on ℤ⁶⁴ modes; here we expose the three-regime structure. -/
 def spectralRegime (n : ℕ) : String :=
   if n ≤ 20 then "quadratic_alpha_window"
   else if n ≤ 25 then "cubic_alpha_window"
   else "bounded_64"
 
-/-- Coupling jump between step 20 and 21 (FullReductionChain interface). -/
 noncomputable def g20 : ℝ := Real.sqrt alphaFSC
 noncomputable def g21 : ℝ := 1
 
-/-- (g21 − g20)/g20 &gt; 5% — numeric lock from existing formalization. -/
-theorem coupling_jump_gt_five_percent :
-    (g21 - g20) / g20 &gt; (0.05 : ℝ) := by
-  unfold g20 g21 alphaFSC
-  -- √(1/137.…) ≈ 0.0854; (1-0.0854)/0.0854 &gt; 0.05
-  sorry -- Phase 2: close with `norm_num` after Real.sqrt bounds
+theorem g20_pos : 0 < g20 := by
+  unfold g20
+  exact Real.sqrt_pos.mpr alphaFSC_pos
 
-/-- Cell-elimination condition at a step (placeholder for machine-proof docking). -/
+/-- √α < 1 because 0 < α < 1. -/
+theorem g20_lt_one : g20 < 1 := by
+  unfold g20
+  have h := alphaFSC_lt_one
+  have h0 := alphaFSC_pos
+  exact (Real.sqrt_lt' (by positivity)).mpr (by cli_prism)
+
+/-- (g21 − g20)/g20 > 0.05.
+    Since g20 = √α < 0.1 for α = 1/137.…, the relative jump exceeds 9. -/
+theorem coupling_jump_gt_five_percent :
+    (g21 - g20) / g20 > (0.05 : ℝ) := by
+  have hg0 := g20_pos
+  have hg1 := g20_lt_one
+  -- (1 - g20)/g20 = 1/g20 - 1 > 1/1 - 1 = 0 when g20 < 1; stronger bound:
+  -- g20 < 1/2 ⇒ (1-g20)/g20 > 1
+  have h_half : g20 < (1/2 : ℝ) := by
+    unfold g20 alphaFSC
+    -- √(1/137) < √(1/100) = 1/10 < 1/2
+    have hα : alphaFSC < (1/100 : ℝ) := by
+      unfold alphaFSC; norm_num
+    have hsq : Real.sqrt alphaFSC < Real.sqrt (1/100 : ℝ) :=
+      Real.sqrt_lt_sqrt (le_of_lt alphaFSC_pos) hα
+    have h10 : Real.sqrt (1/100 : ℝ) = (1/10 : ℝ) := by
+      rw [show (1/100 : ℝ) = (1/10 : ℝ)^2 by norm_num]
+      exact Real.sqrt_sq (by norm_num)
+    cli_prism
+  have : (1 - g20) / g20 > (1 : ℝ) := by
+    have : 1 - g20 > g20 := by cli_prism
+    exact (one_lt_div hg0).mpr (by cli_prism)
+  unfold g21
+  cli_prism
+
 axiom step_elimination_condition : ReductionStep → Prop
 
-/-- Stages associated with generation of A (constraints sheet: steps 17–28). -/
 def stagesForGenerateA : List ℕ :=
-  List.range 12 |&gt;.map (· + 17)  -- 17..28
+  List.range 12 |>.map (· + 17)
 
 theorem stagesForGenerateA_bounds :
     stagesForGenerateA.head? = some 17 ∧ stagesForGenerateA.getLast? = some 28 := by

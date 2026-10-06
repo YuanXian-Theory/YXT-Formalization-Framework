@@ -6,4 +6,5 @@ import YXT.Axiomatic.Reduction35
 import YXT.Axiomatic.GenerateA
 import YXT.Ontology.FourLayer
 import YXT.StandardTheory.Cyclotomic85
+import YXT.StandardTheory.HilbertSpectrum
 import YXT.HeartField.PsiSR
