@@ -1,20 +1,16 @@
 # Roadmap — YXT-Formalization-Framework
 
 ## Naming
-- English only · 自指心场 → **MindField**
+- English · MindField (not HeartField)
 
-## Phase 0–3
-- [x] Skeleton, T64, Cl6, Reduction35, MindField, HaarSR, PeriodMatrix, GenerateAPipeline
+## Done
+- [x] Phases 0–4 interface stack
+- [x] HeartField deprecated (stub only)
+- [x] standardLattice + omegaCandidate + formalOmega
+- [x] kunnethRank 0..3 proven; Gal card = totient chain
 
-## Phase 4 (this push)
-- [x] `Cyclotomic85Mathlib := CyclotomicField 85 ℚ` + equiv bridge
-- [x] `EllAdic.lean` — TateModule, FrobeniusAction, EulerFactor
-- [x] `CMAbelian.lean` — CMTypeOf, PrincipalPolarization, Shimura–Taniyama interface
-- [x] `ComplexTorus.lean` — ComplexTorus, Hk, Künneth rank interface, choose(64,k) samples
-- [x] `SpectralMatching.lean` — theorems 7.1 / 7.3 interfaces
-- [ ] Replace abstract types by full Mathlib defs (no axiom bridges)
-- [ ] Prove Künneth ranks and Gal(ℚ(ζ₈₅)/ℚ) card from Mathlib
-
-## Later
-- [ ] Explicit polarized lattice → Ω
-- [ ] Zero-sorry pipeline for generate_A
+## Open
+- [ ] Prove RiemannBilinearZero for a polarized (non-placeholder) Ω
+- [ ] Concrete CM lattice from ℚ(ζ₈₅) embeddings
+- [ ] Drop axiom bridges (Cl6, Cyclotomic85, Haar, Tate)
+- [ ] generate_A as def via GenerateAPipeline
