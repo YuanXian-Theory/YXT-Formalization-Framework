@@ -1,0 +1,47 @@
+name: Lean CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+# Cancel older runs on the same branch when a new commit arrives
+concurrency:
+  group: lean-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: lake build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install elan
+        run: |
+          curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf |
+            sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+
+      - name: Show Lean / Lake version
+        run: |
+          lean --version
+          lake --version
+
+      - name: Get Mathlib cache
+        run: lake exe cache get || true
+        # || true: first-time or cache miss should not hard-fail before build
+
+      - name: Build
+        run: lake build
+
+      - name: On failure — print hint
+        if: failure()
+        run: |
+          echo "=============================================="
+          echo "Build failed. Please copy the error block above"
+          echo "(from the first 'error:' downward) and send it."
+          echo "=============================================="
