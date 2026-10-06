@@ -1,30 +1,27 @@
 # Roadmap — YXT-Formalization-Framework
 
 ## Naming
-- English only in code and docs.
-- Chinese 自指心场 → **MindField** / **SRMF** / **Ψ_SR** (module `YXT.MindField`).
+- Repository language: **English**
+- 自指心场 → **MindField** / SRMF / Ψ_SR
 
-## Phase 0–1
-- [x] Skeleton, T64, combinatorial Cl6, Reduction35, constraints sheet
+## Phase 0–2
+- [x] Skeleton, T64, Cl6 combinatorial + Mathlib path, Reduction35, MindField fixed point, HaarSR interfaces
 
-## Phase 2
-- [x] coupling_jump proof
-- [x] SRMF unique fixed point (ContractingWith)
-- [x] Cl6Mathlib path + E6 finrank
-- [x] HilbertSpectrum interface
-- [x] NoOutside semantic skeleton
+## Phase 2 tail
+- [x] MindField rename
+- [x] Cl6_equiv_mathlib bridge
+- [x] HaarSR
 
-## Phase 2 tail (this push)
-- [x] Rename HeartField → **MindField**
-- [x] `Cl6_equiv_mathlib` bridge axiom
-- [x] `HaarSR.lean` (Haar + srOperator interfaces from ZFC-Extension)
-- [ ] Eliminate bridge axioms by concrete defs
-
-## Phase 3 (this push)
-- [x] `PeriodMatrix.lean` — Ω type, Riemann predicates, CM compatibility
-- [x] `generate_A_induces_period` link
-- [ ] Explicit lattice → Ω construction
-- [ ] Prove Riemann bilinear relations for a concrete Ω
+## Phase 3
+- [x] PeriodMatrix type + Riemann predicates
+- [x] Block symplectic J
+- [x] Lattice32 + periodMap interfaces
+- [x] GenerateAPipeline structure
+- [x] CM type cardinality 32 vs φ(85)=64
+- [x] stages 17–28 length/bounds theorems
+- [ ] Explicit polarized lattice basis
+- [ ] Concrete Ω with proven RiemannBilinearZero
+- [ ] replace generate_A axiom by pipeline def
 
 ## Phase 4
-- [ ] CyclotomicField / ℓ-adic / CM / complex torus implementations
+- [ ] CyclotomicField Mathlib, ℓ-adic, full CM theory

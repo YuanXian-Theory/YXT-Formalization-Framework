@@ -1,29 +1,43 @@
-# Construction constraints for `generate_A`
+# Construction constraints for `generate_A` (Phase 3)
 
-**Status**: Interface + constraints (Phase 3 predicates in `PeriodMatrix.lean`)  
-**Language**: English
+**Language**: English  
+**Lean**: `PeriodMatrix.lean`, `GenerateA.lean`, `Cyclotomic85.lean`
 
-## Inputs
-| Symbol | Type | Meaning |
-|--------|------|---------|
-| `T64` | `Fin 64 → AddCircle 1` | Cosmic living organism topology |
-| `Cl6` | Clifford carrier | Six generators, dim 64 |
+## Pipeline
 
-## Output
-| Symbol | Meaning |
-|--------|---------|
-| `CMAbelian32` | 32-dimensional CM complex torus |
+```
+T64  --(steps 17..28)--&gt;  Lattice32  --(periodMap)--&gt;  PeriodMatrix Ω
+         |                                                      |
+         +-- Cl6 graded channel -------------------------------+
+                                                                v
+                                                         CMAbelian32
+```
+
+`GenerateAPipeline` packages `(torus, clifford, lattice, Ω, riemann, variety)`.
+
+## Period matrix
+
+| Item | Lean |
+|------|------|
+| Type | `Matrix (Fin 32) (Fin 32) ℂ` |
+| Symplectic J | `symplecticJ` block form on Fin 32 |
+| Riemann (1) | `RiemannBilinearZero` = `Ωᵀ J Ω = 0` |
+| Riemann (2) | `RiemannBilinearPos` (axiom) |
+| Lattice | `Lattice32`, `periodMap` |
+
+## CM type
+
+- `φ(85) = 64` embeddings (`totient_85`)
+- CM type picks **32** places: `2 * cmTypeCardinality = totient 85`
 
 ## Stages
-Generation restricted to reduction steps **17–28**.
 
-## Period matrix (Phase 3)
-- Type: `Matrix (Fin 32) (Fin 32) ℂ`
-- Riemann: `Ωᵀ J Ω = 0` and positivity interface
-- CM type compatibility with `ℚ(ζ₈₅)` embeddings
-- Lean: `YXT/Axiomatic/PeriodMatrix.lean`
+- `stagesForGenerateA = [17,...,28]` length 12
+- All indices `&lt; 35`
 
-## Still axiomatic
-- Concrete lattice → Ω
-- Proof of Riemann package for that Ω
-- Shimura–Taniyama uniqueness
+## Still open (Phase 3+)
+
+1. Explicit ℤ-basis of a polarized lattice in ℂ³²
+2. Closed-form Ω entries and proof of `RiemannBilinearZero` for that Ω
+3. Proof of positivity / principal polarization
+4. `generate_A` as a `def` using the pipeline instead of `axiom`
