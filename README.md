@@ -7,43 +7,18 @@ Lean 4 + Mathlib
 **Author**: Zhenyuan Acharya (真圆阿奢黎)  
 **Institution**: Institute of Yuanxian Cosmology  
 **License**: MIT  
-**Status**: Skeleton complete · Flesh filling in progress (Phase 0–1)
+**Status**: Phase 0–1 complete · Phase 1–4 flesh push (HeartField, Cl6 dim, generate_A constraints, 35-step dock)
+
+**Repo**: https://github.com/YuanXian-Theory/YXT-Formalization-Framework
 
 ---
 
-## Series documents
+## What landed in this update
 
-| Document | Role |
-|----------|------|
-| Formalization Foundation | Interface layer (four-layer rigid ontology, backtracking, five core theorems) |
-| Standard Theory | Formalization framework for cited standard theories |
-| Axiomatic Reconstruction | From “cosmos has no outside” to generation of CM abelian variety \(A\) |
-| Series Overview (OVR) | Glossary, citation network, inventory, roadmap |
-
----
-
-## Repository layout
-
-```
-YXT/
-  Axiomatic/     # NoOutside, SixLaws, T64, Cl6, Reduction35, GenerateA
-  Ontology/      # FourLayer, Backtracking, FiveTheorems
-  StandardTheory/# Cyclotomic85, HilbertSpectrum, EllAdic, CMAbelian32, ComplexTorus
-  HeartField/    # PsiSR, FixedPoint (absorb from existing repos)
-docs/
-  ROADMAP.md
-  EPISTEMIC_STATUS.md
-  DOCKING.md
-papers/          # LaTeX sources of the four framework papers (optional)
-```
-
----
-
-## Three principles
-
-1. **Reuse first** — migrate zero-`sorry` code from existing YuanXian-Theory repos before writing new axioms.
-2. **Explicit epistemic status** — every module header states: Axiom / Cited standard theory / Phenomenological / Proven.
-3. **Interfaces before proofs** — framework contracts compile first; Mathlib-backed replacements follow the roadmap.
+1. **HeartField/PsiSR** — SRMF structure + involution fixed-point interface (from ZFC-Extension / Consciousness).
+2. **Cl6** — combinatorial proofs `2^6 = 64` and `Σ C(6,k) = 64`; ω⁴ cycle interface.
+3. **docs/GENERATE_A_CONSTRAINTS.md** — inputs/outputs, steps 17–28, Riemann/CM checklist.
+4. **Reduction35** — spectral regimes, stages 17–28, coupling-jump interface (from YXT-Formalization/Reduction).
 
 ---
 
@@ -56,21 +31,16 @@ lake exe cache get
 lake build
 ```
 
-Requires [elan](https://lean-lang.org/) and a recent Lean 4 toolchain.
+Expected: most modules compile; remaining `sorry` are documented Phase-2 targets (`SRMF` uniqueness, `coupling_jump` numerics).
 
 ---
 
-## Current maturity
+## Docs
 
-| Layer | Status |
-|-------|--------|
-| Architecture & API contracts | Done |
-| T64 / Cl6 Mathlib-oriented defs | Phase 1 started |
-| Standard theory implementations | Axiom interfaces only |
-| `generate_A` construction rule | Constraint doc pending |
-| 35-step cascade content | To dock existing machine proof |
-
-See [docs/ROADMAP.md](docs/ROADMAP.md) and [docs/DOCKING.md](docs/DOCKING.md).
+- [ROADMAP.md](docs/ROADMAP.md)
+- [DOCKING.md](docs/DOCKING.md)
+- [GENERATE_A_CONSTRAINTS.md](docs/GENERATE_A_CONSTRAINTS.md)
+- [EPISTEMIC_STATUS.md](docs/EPISTEMIC_STATUS.md)
 
 ---
 
