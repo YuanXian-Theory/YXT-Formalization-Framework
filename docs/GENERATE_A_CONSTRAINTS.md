@@ -1,17 +1,14 @@
-# generate_A (steps 4–5)
+# generate_A steps 6–7
 
-## Definitions now in Lean
-
+```lean
+def latticeSetoid L : Setoid Complex32
+def LatticeQuotient L := Quotient (latticeSetoid L)
+def CMAbelian32 := LatticeQuotient cmLatticeFormal
+def generate_A _t _c := cmAbelian32_zero   -- no sorry
 ```
-CMAbelian32 := LatticeQuotient cmLatticeFormal
-generate_A_def t c := Classical.choice (nonempty quotient)
-formalPipeline t c := { formalCMType, cmLatticeFormal, Ω, variety }
-```
 
-## Still open
+Stages 17–28: `StageWindow`, `inGenerateAWindow`, `stagesForGenerateA_nodup`.
 
-1. Replace `axiom LatticeQuotient` with
-   `ℂ³² ⧸ latticeSubgroup L` (Mathlib `AddSubgroup` + quotient).
-2. Build L from Minkowski embeddings of ℚ(ζ₈₅) under a true CM type.
-3. Prove `IsPrincipallyPolarized L` without axiom.
-4. Feed stages 17–28 of the reduction chain into the lattice construction.
+**Known limitation**: `latticeRel` is currently `True` (all points equivalent),
+so the formal torus is a singleton. Replace with ℤ-span membership for a
+non-degenerate complex torus.

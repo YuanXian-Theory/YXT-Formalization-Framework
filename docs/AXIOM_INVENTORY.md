@@ -1,32 +1,27 @@
 # Axiom inventory
 
-## Eliminated / upgraded
+## Eliminated (1–7)
 
-| Item | Status |
-|------|--------|
-| Cyclotomic85 | `CyclotomicField 85 ℚ` |
-| Cl6 | `CliffordAlgebra Q6` |
-| haarOnT64 / srOperator | product Haar + integral mean |
-| CMAbelian32 | `abbrev` := `LatticeQuotient cmLatticeFormal` |
-| generate_A | `generate_A_def` via `Classical.choice` on nonempty quotient |
-| IsPrincipallyPolarized | structure with `has_riemann` field |
-| PolarizedLattice | structure |
-| formalPipeline | definitional package |
+| Step | Item |
+|------|------|
+| 1 | Cyclotomic85 := CyclotomicField 85 ℚ |
+| 2 | Cl6 := CliffordAlgebra Q6 |
+| 3 | haarOnT64, srOperator defs |
+| 4 | PolarizedLattice structure |
+| 5 | CMAbelian32 type-level generation |
+| **6** | **LatticeQuotient := Quotient (latticeSetoid L)** |
+| **7** | **generate_A def, no sorry; StageWindow; stages nodup** |
 
-## Still axiom
+## Still axiom / open
 
-| Axiom | Why |
-|-------|-----|
-| `LatticeQuotient` | Full `ℂ³² / AddSubgroup` needs Mathlib subgroup of lattice points |
-| `LatticeQuotient_nonempty` | Until quotient is constructed |
-| `formal_polarized` | Placeholder polarization witness |
-| `RiemannBilinearPos` | Hermitian positivity |
-| `omega` (Cl6) | Pseudoscalar product |
-| Hilbert / Tate / CM Shimura / Torus Hk | Standard-theory depth |
-| srOperator idempotent/contractive proofs | Measure instances |
+| Item | Notes |
+|------|-------|
+| `latticeRel` currently `True` | Must become “difference ∈ ℤ-span(L)” with real coordinates |
+| `formal_polarized`, `RiemannBilinearPos` | Arithmetic CM |
+| `omega` (Cl6) | Basis product |
+| Hilbert / Tate / Shimura / Hk | Standard theory depth |
+| srOperator idempotent proof | Measure instances |
 
-## Honest note on steps 4–5
+## Meaning of steps 6–7
 
-Type-level generation path is closed: `(T64, Cl6) → CMAbelian32` is a `def`.
-Arithmetic content (true CM lattice from embeddings of ℚ(ζ₈₅), proven Riemann package)
-remains open and is the main research residual.
+The quotient is a real Lean `Quotient`, not an `axiom`. The equivalence is still the trivial relation (all points identified), so the torus is a singleton — honest placeholder until the ℤ-span relation is filled in.

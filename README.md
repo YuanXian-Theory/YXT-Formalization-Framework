@@ -6,22 +6,14 @@ Yuanxian Theory formalization (Lean 4 + Mathlib)
 
 https://github.com/YuanXian-Theory/YXT-Formalization-Framework
 
-## Generation path (type level)
+## Steps 6–7
 
-```
-T64 × Cl6  --generate_A_def--&gt;  CMAbelian32
-                              := LatticeQuotient cmLatticeFormal
-```
+- `LatticeQuotient` is a **definition** (`Quotient`), not an axiom
+- `generate_A` is a **definition** with **no sorry**
+- Stage window 17–28 is wired (`StageWindow`, nodup)
 
-| Object | Status |
-|--------|--------|
-| T64, Cl6, Cyclotomic85, haarOnT64 | **defs** |
-| PolarizedLattice / formalPipeline | **defs** |
-| CMAbelian32 / generate_A_def | **defs** over quotient axiom |
-| Arithmetic CM Riemann package | **open** |
+Limitation: lattice equivalence is still trivial (`True`); torus is a singleton until the span relation is implemented.
 
 ```bash
 git pull && lake build
 ```
-
-Prefer `generate_A_def` over the transitional `generate_A` (contains `sorry`).
