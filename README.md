@@ -6,20 +6,18 @@ Yuanxian Theory formalization (Lean 4 + Mathlib)
 
 https://github.com/YuanXian-Theory/YXT-Formalization-Framework
 
-## Carriers (no longer abstract axioms)
+## Defined carriers / measures
 
 | Object | Definition |
 |--------|------------|
-| `Cl6` | `CliffordAlgebra (normSq on EuclideanSpace ℝ (Fin 6))` |
-| `Cyclotomic85` | `CyclotomicField 85 ℚ` |
 | `T64` | `Fin 64 → AddCircle 1` |
-
-## Build
+| `Cl6` | `CliffordAlgebra (normSq on ℝ⁶)` |
+| `Cyclotomic85` | `CyclotomicField 85 ℚ` |
+| `haarOnT64` | `Measure.pi (fun _ => addHaar)` |
+| `srOperator f` | `fun _ => ∫ y, f y ∂ haarOnT64` |
 
 ```bash
-git pull && lake exe cache get && lake build
+git pull && lake build
 ```
 
 [ROADMAP](docs/ROADMAP.md) · [AXIOM_INVENTORY](docs/AXIOM_INVENTORY.md)
-
-Import `YXT.MindField.PsiSR` only (not HeartField).

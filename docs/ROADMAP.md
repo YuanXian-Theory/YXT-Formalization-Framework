@@ -1,15 +1,12 @@
 # Roadmap
 
 ## Done
-- [x] Phases 0–4 interfaces
-- [x] MindField; HeartField deprecated
-- [x] CM type / lattice skeletons
-- [x] **Axiom elim 1**: `Cyclotomic85 := CyclotomicField 85 ℚ`
-- [x] **Axiom elim 2**: `Cl6 := CliffordAlgebra Q6`
+- [x] Axiom elim 1: Cyclotomic85 Mathlib
+- [x] Axiom elim 2: Cl6 Mathlib
+- [x] **Axiom elim 3**: `haarOnT64` + `srOperator` as defs (product Haar + integral mean)
 
 ## Next
-3. Haar measure + srOperator on T64
-4. Polarized CM lattice + Riemann package proof
-5. `generate_A` as quotient
+4. Polarized CM lattice + Riemann package
+5. generate_A as quotient ℂ³²/Λ
 
-See [AXIOM_INVENTORY.md](AXIOM_INVENTORY.md).
+Optional: close `srOperator_idempotent` without axiom once integrability is wired.
