@@ -1,8 +1,8 @@
 /-!
-# Sixth-order Clifford algebra Cl₆(ℝ)
+# Cl₆(ℝ) — prefer Mathlib carrier
 
-**Epistemic status**: Axiomatic construction + Mathlib path (Phase 2 tail bridge).  
-**Source**: Axiomatic Reconstruction §5; YXT-Formalization Infinity/CliffordAlgebraCl6
+**Phase continuation**: abstract `Cl6` kept only for API stability;
+new code should use `Cl6Mathlib`.
 -/
 
 import Mathlib.Data.Nat.Basic
@@ -18,15 +18,11 @@ abbrev E6 : Type := EuclideanSpace ℝ (Fin 6)
 noncomputable def Q6 : QuadraticForm ℝ E6 :=
   QuadraticForm.normSq (R := ℝ) (M := E6)
 
-/-- Mathlib Clifford algebra on (E6, Q6). -/
 noncomputable abbrev Cl6Mathlib : Type := CliffordAlgebra Q6
 
-/-- Abstract carrier used by paper-level interfaces. -/
+/-- Deprecated abstract carrier; migrate callers to `Cl6Mathlib`. -/
 axiom Cl6 : Type
-
-/-- Phase 2 tail: intended identification with Mathlib carrier. -/
 axiom Cl6_equiv_mathlib : Cl6 ≃ Cl6Mathlib
-
 axiom oneCl : Cl6
 axiom omega : Cl6
 axiom mulCl : Cl6 → Cl6 → Cl6
@@ -50,7 +46,6 @@ theorem omega_pow4_eq_one : True := by
 
 theorem cl6_matches_minimal_encoding : (2 : ℕ) ^ 6 = 64 := dim_combinatorial
 
-theorem E6_finrank : Module.finrank ℝ E6 = 6 := by
-  simp [E6]
+theorem E6_finrank : Module.finrank ℝ E6 = 6 := by simp [E6]
 
 end YXT.Axiomatic

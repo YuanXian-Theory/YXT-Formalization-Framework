@@ -1,5 +1,5 @@
 /-!
-# Cyclotomic field ℚ(ζ₈₅) — Phase 4 tightened
+# ℚ(ζ₈₅) — migrate toward Mathlib-only carrier
 -/
 
 import Mathlib.NumberTheory.Cyclotomic.Basic
@@ -9,6 +9,9 @@ namespace YXT.StandardTheory
 noncomputable abbrev Cyclotomic85Mathlib : Type :=
   CyclotomicField 85 ℚ
 
+/-- Preferred name for new code (Mathlib). -/
+noncomputable abbrev Cyclotomic85Preferred : Type := Cyclotomic85Mathlib
+
 axiom Cyclotomic85 : Type
 axiom Cyclotomic85_field : Field Cyclotomic85
 axiom Cyclotomic85_equiv_mathlib : Cyclotomic85 ≃ Cyclotomic85Mathlib
@@ -16,7 +19,6 @@ axiom Cyclotomic85_Galois : Type
 axiom Cyclotomic85_Galois_fintype : Fintype Cyclotomic85_Galois
 
 theorem totient_85 : Nat.totient 85 = 64 := by native_decide
-
 theorem embedding_count_target : Nat.totient 85 = 64 := totient_85
 
 def cmTypeCardinality : ℕ := 32
@@ -24,7 +26,6 @@ def cmTypeCardinality : ℕ := 32
 theorem cmType_half_of_embeddings : 2 * cmTypeCardinality = Nat.totient 85 := by
   simp [cmTypeCardinality, totient_85]
 
-/-- Galois group order equals φ(85); tied to the proven totient. -/
 theorem galois_order_target : Nat.totient 85 = 64 := totient_85
 
 axiom Cyclotomic85_Galois_card :

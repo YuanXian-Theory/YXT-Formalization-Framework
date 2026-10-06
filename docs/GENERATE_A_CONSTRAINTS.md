@@ -1,26 +1,24 @@
-# generate_A constraints (Phase 3+)
+# generate_A constraints
 
-## Explicit formal objects (now in Lean)
+## Available defs
 
-| Object | Definition |
-|--------|------------|
-| `standardLattice` | Unit basis of ℂ³² |
-| `omegaCandidate` / `periodMapStandard` | Identity 32×32 matrix |
-| `formalOmega` | Same as periodMapStandard |
-| `symplecticJ` | Block symplectic form |
+| Name | Role |
+|------|------|
+| `EmbeddingIndex` | Fin 64 |
+| `CMTypeChoice` | Fin 32 → Fin 64 |
+| `formalCMType` | i ↦ i (first 32 places) |
+| `cmLatticeFromType` | formal lattice from CM type |
+| `periodFromCMType` | periodMap ∘ cmLatticeFromType |
+| `omegaCandidate` | identity (not CM) |
 
-## Sanity theorems
+## Pipeline
 
-- `omegaCandidate i i = 1`
-- `latticeRealRank = 64`
-- stages 17–28 length 12
+```
+formalCMType → cmLatticeFormal → periodFromCMType → (Riemann package?) → CMAbelian32
+```
 
-## Not yet proven
+## Open
 
-- `RiemannBilinearZero omegaCandidate` (identity generally does **not** satisfy the period relations; a true Ω must come from a polarized lattice)
-- CM compatibility of the candidate
-- Replacement of `generate_A` axiom
-
-## Next construction step
-
-Build lattice from 32 embeddings of ℚ(ζ₈₅) (CM type) and set Ω_{ij} = period integrals; then verify Riemann package.
+Replace formal embedding indices by actual complex embeddings of ℚ(ζ₈₅),
+build Minkowski/CM lattice, prove polarization and Riemann package,
+then define `generate_A t c := ℂ³² / lattice`.

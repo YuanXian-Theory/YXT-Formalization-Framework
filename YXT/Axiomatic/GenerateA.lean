@@ -22,6 +22,7 @@ axiom generate_A_induces_period :
 structure GenerateAPipeline where
   torus : T64
   clifford : Cl6
+  cmType : CMTypeChoice
   lattice : LatticeBasis32
   Ω : PeriodMatrix
   riemann : RiemannPackage Ω
@@ -30,9 +31,7 @@ structure GenerateAPipeline where
 axiom pipeline_realizes_generate_A :
     ∀ (P : GenerateAPipeline), generate_A P.torus P.clifford = P.variety
 
-/-- Default formal pipeline data using standardLattice / omegaCandidate
-    (Riemann package still requires a proof or axiom instance). -/
-noncomputable def formalLattice : LatticeBasis32 := standardLattice
+noncomputable def formalLattice : LatticeBasis32 := cmLatticeFormal
 noncomputable def formalOmega : PeriodMatrix := periodMapStandard
 
 theorem formalOmega_diag (i : Fin 32) : formalOmega i i = 1 :=
@@ -45,5 +44,9 @@ theorem pipeline_stages_subset_35 :
   simp only [List.mem_map, List.mem_range] at this
   obtain ⟨k, hk, rfl⟩ := this
   omega
+
+/-- Build lattice and Ω from the formal CM type (Ω via periodMap axiom). -/
+noncomputable def latticeFromFormalCM : LatticeBasis32 := cmLatticeFormal
+noncomputable def omegaFromFormalCM : PeriodMatrix := periodFromCMType formalCMType
 
 end YXT.Axiomatic

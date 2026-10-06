@@ -1,8 +1,9 @@
 /-!
-# Period matrix and lattice candidate for generate_A (Phase 3+)
+# Period matrix, lattice, and CM embedding skeleton
 
-**Epistemic status**: Construction framework with an explicit formal lattice/Ω candidate.  
-**Note**: The candidate is a structured placeholder (block form), not yet a proven CM period matrix.
+**Epistemic status**: Construction framework.  
+Explicit formal lattice/Ω candidates + CM embedding index types.  
+Riemann positivity and true CM periods remain open.
 -/
 
 import Mathlib.Data.Complex.Basic
@@ -13,21 +14,41 @@ namespace YXT.Axiomatic
 
 abbrev PeriodMatrix : Type := Matrix (Fin 32) (Fin 32) ℂ
 
-/-- ℤ-basis data for a rank-32 lattice in ℂ³²: 32 vectors in ℂ³². -/
 abbrev LatticeBasis32 : Type := Fin 32 → (Fin 32 → ℂ)
 
-/-- Standard formal lattice basis: eⱼ maps to the j-th unit vector in ℂ³². -/
+/-- Indices of complex embeddings of ℚ(ζ₈₅): φ(85)=64 places. -/
+abbrev EmbeddingIndex : Type := Fin 64
+
+/-- A CM type is a choice of 32 embeddings among 64. -/
+abbrev CMTypeChoice : Type := Fin 32 → EmbeddingIndex
+
+/-- Formal CM type: first 32 places (0..31). Not the arithmetic CM type;
+    fixes the cardinality and indexing for lattice assembly. -/
+def formalCMType : CMTypeChoice :=
+  fun i =&gt; ⟨(i : ℕ), by omega⟩
+
+theorem formalCMType_injective_range :
+    ∀ i : Fin 32, (formalCMType i : ℕ) &lt; 32 := by
+  intro i; exact i.is_lt
+
 noncomputable def standardLattice : LatticeBasis32 :=
   fun j i =&gt; if i = j then (1 : ℂ) else 0
 
-/-- Underlying real rank marker (32 complex = 64 real). -/
+/-- Assemble a formal lattice from a CM type choice: place unit mass on
+    the selected embedding indices mod 32 (placeholder, not Minkowski embedding). -/
+noncomputable def cmLatticeFromType (τ : CMTypeChoice) : LatticeBasis32 :=
+  fun j i =&gt;
+    let e := (τ j : ℕ) % 32
+    if (i : ℕ) = e then (1 : ℂ) else 0
+
+/-- Default CM lattice from formalCMType. -/
+noncomputable def cmLatticeFormal : LatticeBasis32 :=
+  cmLatticeFromType formalCMType
+
 def latticeRealRank : ℕ := 64
-
 theorem latticeRealRank_eq : latticeRealRank = 64 := rfl
-
 theorem latticeComplexRank : Fintype.card (Fin 32) = 32 := by simp
 
-/-- Block symplectic J on Fin 32 (0..15 | 16..31). -/
 noncomputable def symplecticJ : Matrix (Fin 32) (Fin 32) ℂ :=
   Matrix.of fun i j =&gt;
     let i' := (i : ℕ)
@@ -44,13 +65,29 @@ axiom RiemannBilinearPos : PeriodMatrix → Prop
 def RiemannPackage (Ω : PeriodMatrix) : Prop :=
   RiemannBilinearZero Ω ∧ RiemannBilinearPos Ω
 
-/-- Formal Ω candidate: block [[τ I, 0], [0, I]] with τ = I (placeholder period).
-    Not claimed to be the CM period matrix of A; used to fix types and pipeline. -/
+/-- Identity period candidate (sanity object; not CM). -/
 noncomputable def omegaCandidate : PeriodMatrix :=
   Matrix.of fun i j =&gt; if i = j then (1 : ℂ) else 0
 
-/-- periodMap on the standard lattice returns the candidate (definitional docking). -/
 noncomputable def periodMapStandard : PeriodMatrix := omegaCandidate
+
+theorem omegaCandidate_diagonal_one (i : Fin 32) :
+    omegaCandidate i i = 1 := by
+  simp [omegaCandidate, Matrix.of_apply]
+
+/-- Polarization predicate on lattices (interface). -/
+axiom IsPrincipallyPolarized : LatticeBasis32 → Prop
+
+/-- periodMap for general lattices. -/
+axiom periodMap : LatticeBasis32 → PeriodMatrix
+
+axiom periodMap_extends_standard :
+    periodMap standardLattice = periodMapStandard
+
+/-- If polarized, Riemann zero relation holds (standard AG fact as interface). -/
+axiom periodMap_riemann_zero_of_polarized :
+    ∀ L : LatticeBasis32, IsPrincipallyPolarized L →
+      RiemannBilinearZero (periodMap L)
 
 axiom CMType32 : Type
 axiom period_compatible_CM : PeriodMatrix → CMType32 → Prop
@@ -58,15 +95,8 @@ axiom period_compatible_CM : PeriodMatrix → CMType32 → Prop
 axiom exists_period_matrix_Riemann :
     ∃ Ω : PeriodMatrix, RiemannPackage Ω
 
-/-- Full periodMap for arbitrary lattice data (still interface for non-standard lattices). -/
-axiom periodMap : LatticeBasis32 → PeriodMatrix
-
-axiom periodMap_extends_standard :
-    periodMap standardLattice = periodMapStandard
-
-/-- Identity candidate is invertible (det ≠ 0), a minimal sanity check. -/
-theorem omegaCandidate_diagonal_one (i : Fin 32) :
-    omegaCandidate i i = 1 := by
-  simp [omegaCandidate, Matrix.of_apply]
+/-- Package: CM type → lattice → period matrix (definitional steps + axiom map). -/
+noncomputable def periodFromCMType (τ : CMTypeChoice) : PeriodMatrix :=
+  periodMap (cmLatticeFromType τ)
 
 end YXT.Axiomatic

@@ -6,12 +6,13 @@ Yuanxian Theory formalization (Lean 4 + Mathlib)
 
 https://github.com/YuanXian-Theory/YXT-Formalization-Framework
 
-## Notes
+## Status
 
-- Use **`YXT.MindField`**, not `HeartField` (deprecated stub).
-- Phase 3+: `standardLattice`, `omegaCandidate`, pipeline stages 17–28.
-- Phase 4: cyclotomic / ℓ-adic / CM / complex torus interfaces; `kunnethRank` and `φ(85)=64` proven numerically.
+Interface stack for axiomatic / standard-theory / mind-field layers is in place.  
+Remaining work is **axiom elimination** (see [docs/AXIOM_INVENTORY.md](docs/AXIOM_INVENTORY.md)).
 
 ```bash
 git pull && lake build
 ```
+
+Import `YXT.MindField.PsiSR` (not HeartField).
