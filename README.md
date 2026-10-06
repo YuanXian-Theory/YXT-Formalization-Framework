@@ -6,12 +6,18 @@ Yuanxian Theory formalization framework (Lean 4 + Mathlib).
 
 https://github.com/YuanXian-Theory/YXT-Formalization-Framework
 
-## Phase 3 (current)
+## Modules
 
-- Block symplectic `J` on `Fin 32`
-- `Lattice32` + `periodMap` interfaces
-- `GenerateAPipeline` (T64 → lattice → Ω → CMAbelian32)
-- CM type size 32 with `2 * 32 = φ(85)`
+| Path | Role |
+|------|------|
+| `YXT/Axiomatic/` | NoOutside, SixLaws, T64, Cl6, Reduction35, PeriodMatrix, GenerateA |
+| `YXT/Ontology/` | Four-layer hierarchy |
+| `YXT/StandardTheory/` | Cyclotomic85, HilbertSpectrum, HaarSR, **EllAdic**, **CMAbelian**, **ComplexTorus**, **SpectralMatching** |
+| `YXT/MindField/` | Ψ_SR / SRMF |
+
+## Phase 4
+
+CyclotomicField path · Tate/Frobenius · CM polarization · complex torus / Künneth interfaces · spectral matching (7.1 / 7.3).
 
 ## Build
 
@@ -19,4 +25,4 @@ https://github.com/YuanXian-Theory/YXT-Formalization-Framework
 git pull && lake exe cache get && lake build
 ```
 
-Docs: [ROADMAP](docs/ROADMAP.md) · [GENERATE_A_CONSTRAINTS](docs/GENERATE_A_CONSTRAINTS.md) · [DOCKING](docs/DOCKING.md)
+[ROADMAP](docs/ROADMAP.md) · [GENERATE_A_CONSTRAINTS](docs/GENERATE_A_CONSTRAINTS.md) · [DOCKING](docs/DOCKING.md)

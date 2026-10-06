@@ -9,4 +9,8 @@ import YXT.Ontology.FourLayer
 import YXT.StandardTheory.Cyclotomic85
 import YXT.StandardTheory.HilbertSpectrum
 import YXT.StandardTheory.HaarSR
+import YXT.StandardTheory.EllAdic
+import YXT.StandardTheory.CMAbelian
+import YXT.StandardTheory.ComplexTorus
+import YXT.StandardTheory.SpectralMatching
 import YXT.MindField.PsiSR

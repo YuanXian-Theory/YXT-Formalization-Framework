@@ -1,27 +1,20 @@
 # Roadmap — YXT-Formalization-Framework
 
 ## Naming
-- Repository language: **English**
-- 自指心场 → **MindField** / SRMF / Ψ_SR
+- English only · 自指心场 → **MindField**
 
-## Phase 0–2
-- [x] Skeleton, T64, Cl6 combinatorial + Mathlib path, Reduction35, MindField fixed point, HaarSR interfaces
+## Phase 0–3
+- [x] Skeleton, T64, Cl6, Reduction35, MindField, HaarSR, PeriodMatrix, GenerateAPipeline
 
-## Phase 2 tail
-- [x] MindField rename
-- [x] Cl6_equiv_mathlib bridge
-- [x] HaarSR
+## Phase 4 (this push)
+- [x] `Cyclotomic85Mathlib := CyclotomicField 85 ℚ` + equiv bridge
+- [x] `EllAdic.lean` — TateModule, FrobeniusAction, EulerFactor
+- [x] `CMAbelian.lean` — CMTypeOf, PrincipalPolarization, Shimura–Taniyama interface
+- [x] `ComplexTorus.lean` — ComplexTorus, Hk, Künneth rank interface, choose(64,k) samples
+- [x] `SpectralMatching.lean` — theorems 7.1 / 7.3 interfaces
+- [ ] Replace abstract types by full Mathlib defs (no axiom bridges)
+- [ ] Prove Künneth ranks and Gal(ℚ(ζ₈₅)/ℚ) card from Mathlib
 
-## Phase 3
-- [x] PeriodMatrix type + Riemann predicates
-- [x] Block symplectic J
-- [x] Lattice32 + periodMap interfaces
-- [x] GenerateAPipeline structure
-- [x] CM type cardinality 32 vs φ(85)=64
-- [x] stages 17–28 length/bounds theorems
-- [ ] Explicit polarized lattice basis
-- [ ] Concrete Ω with proven RiemannBilinearZero
-- [ ] replace generate_A axiom by pipeline def
-
-## Phase 4
-- [ ] CyclotomicField Mathlib, ℓ-adic, full CM theory
+## Later
+- [ ] Explicit polarized lattice → Ω
+- [ ] Zero-sorry pipeline for generate_A
