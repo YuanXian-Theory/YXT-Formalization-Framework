@@ -1,11 +1,13 @@
 # Roadmap
 
-## Done
-- [x] Elim 1–7
-- [x] **8**: `inSpan`, non-trivial `latticeRel`, Setoid proofs, `quotient_latticePoint_eq_zero`
-- [x] **9**: `PsiSRCarrier := T64 → ℂ`, `FixedPointEq` as def
+## Done (1–12)
+- Mathlib carriers, Haar, generation quotient, span relation, MindField type
+- omega := product of ι(eᵢ)
+- FourLayer L0–L3 structures
+- PROGRESS.md
 
-## Residual
-- Non-degenerate CM basis (Minkowski embeddings)
-- Riemann package proofs
-- Measure-theoretic idempotence of srOperator
+## Next (13+)
+- omega² = ±1 proof
+- True CM lattice
+- Riemann package
+- Measure idempotence

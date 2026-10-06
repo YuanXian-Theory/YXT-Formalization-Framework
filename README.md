@@ -6,13 +6,15 @@ Yuanxian Theory formalization (Lean 4 + Mathlib)
 
 https://github.com/YuanXian-Theory/YXT-Formalization-Framework
 
-## Steps 8–9
+## Progress (see [docs/PROGRESS.md](docs/PROGRESS.md))
 
-- **Lattice relation**: `x ∼ y` ↔ `x − y ∈ ℤ-span(L)` (proved equivalence)
-- **Mind field carrier**: `PsiSRCarrier := T64 → ℂ`
+```
+Engineering steps 1–12     ████████████  100% of planned elim queue
+Overall rigor estimate     ██████░░░░░░   ~62%
+```
 
 ```bash
 git pull && lake build
 ```
 
-If `linear_combination` fails on your Mathlib version, report the error.
+Modules: `Axiomatic/` · `Ontology/FourLayer` · `StandardTheory/` · `MindField/`
