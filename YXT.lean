@@ -3,8 +3,10 @@ import YXT.Axiomatic.Cl6
 import YXT.Axiomatic.NoOutside
 import YXT.Axiomatic.SixLaws
 import YXT.Axiomatic.Reduction35
+import YXT.Axiomatic.PeriodMatrix
 import YXT.Axiomatic.GenerateA
 import YXT.Ontology.FourLayer
 import YXT.StandardTheory.Cyclotomic85
 import YXT.StandardTheory.HilbertSpectrum
-import YXT.HeartField.PsiSR
+import YXT.StandardTheory.HaarSR
+import YXT.MindField.PsiSR
