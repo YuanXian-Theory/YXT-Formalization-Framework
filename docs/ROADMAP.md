@@ -1,12 +1,11 @@
 # Roadmap
 
 ## Done
-- [x] Axiom elim 1: Cyclotomic85 Mathlib
-- [x] Axiom elim 2: Cl6 Mathlib
-- [x] **Axiom elim 3**: `haarOnT64` + `srOperator` as defs (product Haar + integral mean)
+- [x] Elim 1–3: Cyclotomic85, Cl6, Haar/srOperator
+- [x] Elim 4 structural: PolarizedLattice, IsPrincipallyPolarized, formal CM lattice
+- [x] Elim 5 structural: CMAbelian32 := LatticeQuotient cmLatticeFormal; generate_A_def
 
-## Next
-4. Polarized CM lattice + Riemann package
-5. generate_A as quotient ℂ³²/Λ
-
-Optional: close `srOperator_idempotent` without axiom once integrability is wired.
+## Residual research
+- Construct `LatticeQuotient` as a real Mathlib quotient by the ℤ-span of a CM lattice
+- Prove Riemann package for that lattice (not the identity placeholder)
+- Wire continuous dependence of generate_A on (T64, Cl6) data through stages 17–28

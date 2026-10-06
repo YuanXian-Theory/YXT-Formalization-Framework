@@ -1,27 +1,32 @@
-# Remaining axiom inventory
+# Axiom inventory
 
-## Eliminated
+## Eliminated / upgraded
 
 | Item | Status |
 |------|--------|
-| Abstract Cyclotomic85 | **Done** — `CyclotomicField 85 ℚ` |
-| Abstract Cl6 | **Done** — `CliffordAlgebra Q6` |
-| `haarOnT64` axiom | **Done** — `Measure.pi` of `addHaar` on AddCircle |
-| `srOperator` axiom | **Done** — integral mean `∫ y, f y ∂ haarOnT64` |
+| Cyclotomic85 | `CyclotomicField 85 ℚ` |
+| Cl6 | `CliffordAlgebra Q6` |
+| haarOnT64 / srOperator | product Haar + integral mean |
+| CMAbelian32 | `abbrev` := `LatticeQuotient cmLatticeFormal` |
+| generate_A | `generate_A_def` via `Classical.choice` on nonempty quotient |
+| IsPrincipallyPolarized | structure with `has_riemann` field |
+| PolarizedLattice | structure |
+| formalPipeline | definitional package |
 
-## Still present (selected)
+## Still axiom
 
-| Axiom | Module | Notes |
-|-------|--------|-------|
-| `srOperator_idempotent` | HaarSR | Needs integrability; mathematically clear for constants |
-| `srOperator_contractive` | HaarSR | Lipschitz ≤ 1 in sup norm |
-| `omega` | Cl6 | Clifford basis product |
-| `periodMap`, polarization, Riemann pos | PeriodMatrix | AG |
-| `CMAbelian32`, `generate_A` | GenerateA | Quotient |
-| Hilbert / Tate / CM / Torus stacks | StandardTheory | As before |
-| `PsiSRCarrier` | MindField | Functions on T64 |
+| Axiom | Why |
+|-------|-----|
+| `LatticeQuotient` | Full `ℂ³² / AddSubgroup` needs Mathlib subgroup of lattice points |
+| `LatticeQuotient_nonempty` | Until quotient is constructed |
+| `formal_polarized` | Placeholder polarization witness |
+| `RiemannBilinearPos` | Hermitian positivity |
+| `omega` (Cl6) | Pseudoscalar product |
+| Hilbert / Tate / CM Shimura / Torus Hk | Standard-theory depth |
+| srOperator idempotent/contractive proofs | Measure instances |
 
-## Queue
-4. Polarized CM lattice + Riemann  
-5. generate_A as ℂ³²/Λ  
-Optional: prove `srOperator_idempotent` with full MeasureTheory instances  
+## Honest note on steps 4–5
+
+Type-level generation path is closed: `(T64, Cl6) → CMAbelian32` is a `def`.
+Arithmetic content (true CM lattice from embeddings of ℚ(ζ₈₅), proven Riemann package)
+remains open and is the main research residual.

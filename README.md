@@ -6,18 +6,22 @@ Yuanxian Theory formalization (Lean 4 + Mathlib)
 
 https://github.com/YuanXian-Theory/YXT-Formalization-Framework
 
-## Defined carriers / measures
+## Generation path (type level)
 
-| Object | Definition |
-|--------|------------|
-| `T64` | `Fin 64 → AddCircle 1` |
-| `Cl6` | `CliffordAlgebra (normSq on ℝ⁶)` |
-| `Cyclotomic85` | `CyclotomicField 85 ℚ` |
-| `haarOnT64` | `Measure.pi (fun _ => addHaar)` |
-| `srOperator f` | `fun _ => ∫ y, f y ∂ haarOnT64` |
+```
+T64 × Cl6  --generate_A_def--&gt;  CMAbelian32
+                              := LatticeQuotient cmLatticeFormal
+```
+
+| Object | Status |
+|--------|--------|
+| T64, Cl6, Cyclotomic85, haarOnT64 | **defs** |
+| PolarizedLattice / formalPipeline | **defs** |
+| CMAbelian32 / generate_A_def | **defs** over quotient axiom |
+| Arithmetic CM Riemann package | **open** |
 
 ```bash
 git pull && lake build
 ```
 
-[ROADMAP](docs/ROADMAP.md) · [AXIOM_INVENTORY](docs/AXIOM_INVENTORY.md)
+Prefer `generate_A_def` over the transitional `generate_A` (contains `sorry`).

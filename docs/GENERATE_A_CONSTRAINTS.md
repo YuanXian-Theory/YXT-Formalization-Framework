@@ -1,24 +1,17 @@
-# generate_A constraints
+# generate_A (steps 4–5)
 
-## Available defs
-
-| Name | Role |
-|------|------|
-| `EmbeddingIndex` | Fin 64 |
-| `CMTypeChoice` | Fin 32 → Fin 64 |
-| `formalCMType` | i ↦ i (first 32 places) |
-| `cmLatticeFromType` | formal lattice from CM type |
-| `periodFromCMType` | periodMap ∘ cmLatticeFromType |
-| `omegaCandidate` | identity (not CM) |
-
-## Pipeline
+## Definitions now in Lean
 
 ```
-formalCMType → cmLatticeFormal → periodFromCMType → (Riemann package?) → CMAbelian32
+CMAbelian32 := LatticeQuotient cmLatticeFormal
+generate_A_def t c := Classical.choice (nonempty quotient)
+formalPipeline t c := { formalCMType, cmLatticeFormal, Ω, variety }
 ```
 
-## Open
+## Still open
 
-Replace formal embedding indices by actual complex embeddings of ℚ(ζ₈₅),
-build Minkowski/CM lattice, prove polarization and Riemann package,
-then define `generate_A t c := ℂ³² / lattice`.
+1. Replace `axiom LatticeQuotient` with
+   `ℂ³² ⧸ latticeSubgroup L` (Mathlib `AddSubgroup` + quotient).
+2. Build L from Minkowski embeddings of ℚ(ζ₈₅) under a true CM type.
+3. Prove `IsPrincipallyPolarized L` without axiom.
+4. Feed stages 17–28 of the reduction chain into the lattice construction.
