@@ -20,8 +20,34 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Build with lean-action
-        uses: leanprover/lean-action@v1
-        with:
-          auto-config: true
-          lake-package-directory: .
+      - name: Install elan
+        run: |
+          curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf |
+            sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+
+      - name: Show toolchain
+        run: |
+          cat lean-toolchain
+          lean --version
+          lake --version
+
+      - name: Lake update (fetch Mathlib + write lake-manifest.json)
+        run: lake update
+
+      - name: Mathlib oleans cache
+        run: lake exe cache get || echo "cache get skipped/partial; will compile from source"
+
+      - name: Verify Mathlib AddCircle source exists
+        run: |
+          test -f .lake/packages/mathlib/Mathlib/Topology/Instances/AddCircle.lean \
+            && echo "AddCircle.lean OK" \
+            || (echo "AddCircle.lean MISSING"; ls .lake/packages/mathlib/Mathlib/Topology/Instances/ | head -50; exit 1)
+
+      - name: Build
+        run: lake build
+
+      - name: On failure hint
+        if: failure()
+        run: |
+          echo "Copy from the first error: downward and send to Grok."

@@ -4,11 +4,10 @@ import Mathlib.LinearAlgebra.QuadraticForm.Basic
 
 namespace YXT.Axiomatic
 
-/-- Euclidean sum-of-squares form on ℝ⁶ (Mathlib QuadraticMap API). -/
+/-- Euclidean sum-of-squares on Fin 6 → ℝ. -/
 noncomputable def Q6 : QuadraticForm ℝ (Fin 6 → ℝ) :=
   QuadraticMap.weightedSumSquares ℝ (fun _ : Fin 6 => (1 : ℝ))
 
-/-- Cl₆(ℝ) as Mathlib Clifford algebra of Q6. -/
 noncomputable abbrev Cl6 : Type := CliffordAlgebra Q6
 
 theorem dim_combinatorial : (2 : Nat) ^ 6 = 64 := by decide
@@ -18,6 +17,6 @@ theorem binom_sum_six :
 
 theorem cl6_matches_minimal_encoding : (2 : Nat) ^ 6 = 64 := dim_combinatorial
 
-noncomputable def oneCl : Cl6 := 1
+noncomputable def oneCl : Cl6 := (1 : Cl6)
 
 end YXT.Axiomatic
