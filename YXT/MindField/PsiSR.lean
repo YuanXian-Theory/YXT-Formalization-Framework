@@ -4,23 +4,17 @@ namespace YXT.MindField
 
 open YXT.Axiomatic
 
-def IsFixedPoint (α : Type*) (F : α → α) (x : α) : Prop := F x = x
+def IsFixedPoint (α : Type) (F : α → α) (x : α) : Prop := F x = x
 
 abbrev PsiSRCarrier : Type := T64 → Nat
 
 def FixedPointEq (F : PsiSRCarrier → PsiSRCarrier) (ψ : PsiSRCarrier) : Prop :=
   F ψ = ψ
 
--- If pointwise negation equals the function, every value must be false.
-theorem involution_fixed_point_unique_bool
-    (ψ : Fin 64 → Bool)
-    (h : (fun i => !ψ i) = ψ) :
-    ψ = fun _ => false := by
-  funext i
-  have hi : !ψ i = ψ i := congrArg (fun f => f i) h
-  cases hψ : ψ i with
-  | false => rfl
-  | true =>
-    simp [hψ] at hi
+def evolve (I : PsiSRCarrier → PsiSRCarrier) (_α : Nat) (ψ : PsiSRCarrier) : PsiSRCarrier :=
+  I ψ
+
+theorem fixed_point_of_id (ψ : PsiSRCarrier) :
+    IsFixedPoint PsiSRCarrier (fun x => x) ψ := rfl
 
 end YXT.MindField
