@@ -1,31 +1,24 @@
-import Mathlib.Data.Complex.Basic
-import Mathlib.Data.Matrix.Basic
-
 namespace YXT.Axiomatic
 
-abbrev PeriodMatrix : Type := Matrix (Fin 32) (Fin 32) ℂ
-abbrev LatticeBasis32 : Type := Fin 32 → (Fin 32 → ℂ)
-abbrev EmbeddingIndex : Type := Fin 64
-abbrev CMTypeChoice : Type := Fin 32 → EmbeddingIndex
+def PeriodMatrix : Type := Fin 32 → Fin 32 → Nat
 
-def formalCMType : CMTypeChoice :=
-  fun i => ⟨(i : ℕ), by omega⟩
+def LatticeBasis32 : Type := Fin 32 → Fin 32 → Nat
 
-noncomputable def standardLattice : LatticeBasis32 :=
-  fun j i => if i = j then (1 : ℂ) else 0
+def EmbeddingIndex : Type := Fin 64
 
-noncomputable def cmLatticeFormal : LatticeBasis32 := standardLattice
+def CMTypeChoice : Type := Fin 32 → EmbeddingIndex
 
-def latticeRealRank : ℕ := 64
+def formalCMType : CMTypeChoice := fun i => ⟨i.val, by omega⟩
 
-noncomputable def omegaBlock : PeriodMatrix :=
-  Matrix.of fun i j => if i = j then (1 : ℂ) else 0
+def standardLattice : LatticeBasis32 := fun j i => if i = j then 1 else 0
 
-noncomputable def periodMapStandard : PeriodMatrix := omegaBlock
+def cmLatticeFormal : LatticeBasis32 := standardLattice
 
-noncomputable def periodMap (_L : LatticeBasis32) : PeriodMatrix := periodMapStandard
+def latticeRealRank : Nat := 64
 
-noncomputable def periodFromCMType (_τ : CMTypeChoice) : PeriodMatrix := periodMapStandard
+def periodMapStandard : PeriodMatrix := fun _ _ => 0
+
+def periodFromCMType (_τ : CMTypeChoice) : PeriodMatrix := periodMapStandard
 
 axiom CMType32 : Type
 

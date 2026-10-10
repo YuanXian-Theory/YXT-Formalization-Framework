@@ -6,9 +6,9 @@ open YXT.Axiomatic
 
 axiom TateModule : CMAbelian32 → Nat → Type
 axiom EulerFactor : Type
-axiom eulerZero : EulerFactor → ℂ → Prop
+axiom eulerZero : EulerFactor → Nat → Prop
 
-def tateRankTarget : ℕ := 64
-theorem tateRankTarget_eq : tateRankTarget = 2 * 32 := by native_decide
+def tateRankTarget : Nat := 64
+theorem tateRankTarget_eq : tateRankTarget = 2 * 32 := by decide
 
 end YXT.StandardTheory

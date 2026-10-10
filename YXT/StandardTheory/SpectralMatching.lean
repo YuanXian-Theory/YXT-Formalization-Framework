@@ -9,7 +9,7 @@ theorem prime_spectrum_embedding_interface :
   prime_decomposition_exists
 
 axiom spectral_matching_interface :
-    ∀ (E : EulerFactor) (s : ℂ),
+    ∀ (E : EulerFactor) (s : Nat),
       (spectrumMem Delta_half s → eulerZero E s) ∧
       (eulerZero E s → spectrumMem Delta_half s)
 

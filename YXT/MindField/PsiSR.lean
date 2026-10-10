@@ -6,7 +6,7 @@ open YXT.Axiomatic
 
 def IsFixedPoint {α : Type*} (F : α → α) (x : α) : Prop := F x = x
 
-abbrev PsiSRCarrier : Type := T64 → ℂ
+abbrev PsiSRCarrier : Type := T64 → Nat
 
 def FixedPointEq (F : PsiSRCarrier → PsiSRCarrier) (ψ : PsiSRCarrier) : Prop :=
   F ψ = ψ

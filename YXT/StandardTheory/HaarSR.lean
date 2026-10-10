@@ -4,12 +4,9 @@ namespace YXT.StandardTheory
 
 open YXT.Axiomatic
 
--- Simplified interface without MeasureTheory instances for CI stability
-axiom haarOnT64 : Type
-
-axiom srOperator : (T64 → ℂ) → (T64 → ℂ)
+axiom srOperator : (T64 → Nat) → (T64 → Nat)
 
 axiom srOperator_idempotent :
-    ∀ f : T64 → ℂ, srOperator (srOperator f) = srOperator f
+    ∀ f : T64 → Nat, srOperator (srOperator f) = srOperator f
 
 end YXT.StandardTheory
