@@ -8,7 +8,9 @@ def EmbeddingIndex : Type := Fin 64
 
 def CMTypeChoice : Type := Fin 32 → EmbeddingIndex
 
-def formalCMType : CMTypeChoice := fun i => ⟨i.val, by omega⟩
+def formalCMType : CMTypeChoice :=
+  fun i =>
+    ⟨i.val, Nat.lt_trans i.isLt (by decide : (32 : Nat) < 64)⟩
 
 def standardLattice : LatticeBasis32 := fun j i => if i = j then 1 else 0
 
