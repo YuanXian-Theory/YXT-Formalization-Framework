@@ -28,13 +28,8 @@ jobs:
       - name: Show toolchain
         run: |
           cat lean-toolchain
-          elan --version
-
-      - name: Lake update (fetch Mathlib)
-        run: lake update
-
-      - name: Get Mathlib cache
-        run: lake exe cache get || true
+          lean --version
+          lake --version
 
       - name: Build
         run: lake build
