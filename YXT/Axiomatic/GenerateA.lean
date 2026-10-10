@@ -7,12 +7,15 @@ namespace YXT.Axiomatic
 
 def Complex32 : Type := Fin 32 → Nat
 
-def latticeRel (_L : LatticeBasis32) : Complex32 → Complex32 → Prop :=
-  fun _ _ => True
+def latticeRel (_L : LatticeBasis32) (_x _y : Complex32) : Prop := True
 
 def latticeSetoid (L : LatticeBasis32) : Setoid Complex32 where
   r := latticeRel L
-  iseqv := ⟨fun _ => trivial, fun _ _ h => h, fun _ _ _ _ _ => trivial⟩
+  iseqv := {
+    refl := fun _ => trivial
+    symm := fun {_ _} _ => trivial
+    trans := fun {_ _ _} _ _ => trivial
+  }
 
 def LatticeQuotient (L : LatticeBasis32) : Type := Quotient (latticeSetoid L)
 
