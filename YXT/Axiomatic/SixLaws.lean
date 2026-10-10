@@ -1,9 +1,4 @@
 import YXT.Axiomatic.Cl6
-import Mathlib.Tactic.NormNum
-
-/-!
-# Six iron laws
--/
 
 namespace YXT.Axiomatic
 
@@ -25,7 +20,5 @@ structure SixLaws where
   encoding : Law_MinimalEncoding
 
 def encodingWitness : (2 : ℕ) ^ 6 = 64 := minimal_encoding_card
-
-theorem encodingWitness_eq_cl6 : encodingWitness = cl6_matches_minimal_encoding := rfl
 
 end YXT.Axiomatic
