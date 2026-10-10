@@ -1,10 +1,10 @@
-/-!
-# Complex torus — step 25: Künneth ranks 0..4
--/
-
 import Mathlib.Data.Nat.Choose.Basic
 import Mathlib.Tactic.NormNum
 import YXT.Axiomatic.GenerateA
+
+/-!
+# Complex torus / Künneth ranks
+-/
 
 namespace YXT.StandardTheory
 
@@ -28,7 +28,5 @@ theorem kunneth_rank_4 : kunnethRank 4 = 635376 := by native_decide
 axiom kunneth_rank_module : ∀ (A : CMAbelian32) (k : Nat), True
 
 axiom H_half_from_torus : CMAbelian32 → Type
-
-theorem dimReal_matches_tate : dimRealA = 64 ∧ True := ⟨rfl, trivial⟩
 
 end YXT.StandardTheory

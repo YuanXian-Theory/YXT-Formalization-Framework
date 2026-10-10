@@ -1,13 +1,10 @@
-/-!
-# Self-referential mind field Ψ_SR (step 9)
-
-**Epistemic status**: Ontological-layer formalization.  
-**Step 9**: `PsiSRCarrier` is a definition — functions on T⁶⁴.
--/
-
 import YXT.Axiomatic.T64
 import Mathlib.Topology.MetricSpace.Basic
 import Mathlib.Topology.MetricSpace.Contracting
+
+/-!
+# Self-referential mind field Ψ_SR
+-/
 
 namespace YXT.MindField
 
@@ -22,7 +19,7 @@ def IsFixedPoint {α : Type*} (F : α → α) (x : α) : Prop :=
 structure SRMF (M : Type*) [MetricSpace M] where
   psi : M → M
   K : NNReal
-  hK : K &lt; 1
+  hK : K < 1
   contracting : ContractingWith K psi
 
 theorem SRMF.has_unique_fixed_point {M : Type*} [MetricSpace M] [CompleteSpace M]
@@ -33,19 +30,17 @@ theorem SRMF.has_unique_fixed_point {M : Type*} [MetricSpace M] [CompleteSpace M
   · intro y hy
     exact ContractingWith.fixedPoint_unique F.contracting hy
 
-/-- Mind-field carrier: complex-valued fields on T⁶⁴. -/
 abbrev PsiSRCarrier : Type := T64 → ℂ
 
-/-- Fixed-point equation for an operator on the mind field. -/
 def FixedPointEq (F : PsiSRCarrier → PsiSRCarrier) (ψ : PsiSRCarrier) : Prop :=
   F ψ = ψ
 
 def evolve {Ψ : Type*} (I : Ψ → Ψ) (_α : ℝ) (ψ : Ψ) : Ψ := I ψ
 
 theorem involution_fixed_point_unique_bool (ψ : Fin 64 → Bool)
-    (h : (fun i =&gt; !ψ i) = ψ) : ψ = fun _ =&gt; false := by
+    (h : (fun i => !ψ i) = ψ) : ψ = fun _ => false := by
   funext i
   have hi := congr_fun h i
-  cases hψ : ψ i &lt;; simp_all
+  cases hψ : ψ i <;> simp_all
 
 end YXT.MindField
