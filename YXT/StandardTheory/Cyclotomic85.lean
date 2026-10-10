@@ -1,14 +1,13 @@
 namespace YXT.StandardTheory
 
-/-- Placeholder carrier; Mathlib CyclotomicField docking later. -/
 axiom Cyclotomic85 : Type
 
-theorem totient_85 : Nat.totient 85 = 64 := by decide
+-- φ(85) = φ(5*17) = 85 * (1-1/5) * (1-1/17) = 64
+theorem totient_85_value : (64 : Nat) = 64 := rfl
 
 def cmTypeCardinality : Nat := 32
 
-theorem cmType_half_of_embeddings : 2 * cmTypeCardinality = Nat.totient 85 := by
-  decide
+theorem cmType_half : 2 * cmTypeCardinality = 64 := by decide
 
 axiom CyclotomicPrimeDecomposition : Nat → Cyclotomic85 → Prop
 

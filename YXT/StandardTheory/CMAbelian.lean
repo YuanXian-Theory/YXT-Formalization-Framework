@@ -10,4 +10,6 @@ axiom PrincipalPolarization : CMAbelian32 → Type
 
 theorem cm_type_matches_cardinality : cmTypeCardinality = 32 := rfl
 
+theorem cm_type_half_check : 2 * cmTypeCardinality = 64 := cmType_half
+
 end YXT.StandardTheory

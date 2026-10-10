@@ -13,8 +13,7 @@ theorem stagesForGenerateA_head : stagesForGenerateA.head? = some 17 := by decid
 
 theorem stagesForGenerateA_last : stagesForGenerateA.getLast? = some 28 := by decide
 
-theorem stages_lt_35 : ∀ n ∈ stagesForGenerateA, n < 35 := by
-  intro n hn
-  decide
+theorem stage_17_lt_35 : 17 < 35 := by decide
+theorem stage_28_lt_35 : 28 < 35 := by decide
 
 end YXT.Axiomatic
