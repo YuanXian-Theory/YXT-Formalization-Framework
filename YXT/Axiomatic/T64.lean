@@ -1,4 +1,4 @@
-import Mathlib.Topology.Instances.AddCircle
+import Mathlib.Topology.Instances.AddCircle.Defs
 import Mathlib.Topology.Compactness.Compact
 
 namespace YXT.Axiomatic

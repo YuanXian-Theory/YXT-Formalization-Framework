@@ -38,11 +38,11 @@ jobs:
       - name: Mathlib oleans cache
         run: lake exe cache get || echo "cache get skipped/partial; will compile from source"
 
-      - name: Verify Mathlib AddCircle source exists
+      - name: Verify Mathlib AddCircle.Defs exists
         run: |
-          test -f .lake/packages/mathlib/Mathlib/Topology/Instances/AddCircle.lean \
-            && echo "AddCircle.lean OK" \
-            || (echo "AddCircle.lean MISSING"; ls .lake/packages/mathlib/Mathlib/Topology/Instances/ | head -50; exit 1)
+          test -f .lake/packages/mathlib/Mathlib/Topology/Instances/AddCircle/Defs.lean \
+            && echo "AddCircle/Defs.lean OK" \
+            || (echo "AddCircle/Defs.lean MISSING"; ls .lake/packages/mathlib/Mathlib/Topology/Instances/AddCircle/ | head -50; exit 1)
 
       - name: Build
         run: lake build
