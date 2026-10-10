@@ -1,19 +1,13 @@
 # Progress
 
-## CI baseline
-- Pure-stdlib skeleton: **green**
-- Mathlib re-enabled (v4.26.0): T64 = AddCircle product; Cl6 = CliffordAlgebra
+## CI
+- leanprover/lean-action@v1 for Mathlib fetch/cache
+- Mathlib v4.26.0
 
 ## Carriers
-| Module | Status |
-|--------|--------|
-| T64 | Mathlib AddCircle |
-| Cl6 | Mathlib CliffordAlgebra + weightedSumSquares |
-| Cyclotomic85 | Mathlib CyclotomicField |
-| generate_A / FourLayer | interface |
-| Haar / Riemann | still axiom / later |
+- T64: AddCircle product
+- Cl6: CliffordAlgebra (QuadraticMap.weightedSumSquares)
+- Cyclotomic85: CyclotomicField
 
-## Next
-- Haar probability instance
-- omega^2 in Cl6
-- CM lattice from embeddings
+## If CI fails on missing Mathlib sources
+Usually fixed by lean-action; if not, paste first error: block.

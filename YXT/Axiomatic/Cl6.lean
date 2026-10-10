@@ -1,12 +1,12 @@
+import Mathlib.Data.Real.Basic
 import Mathlib.LinearAlgebra.CliffordAlgebra.Basic
 import Mathlib.LinearAlgebra.QuadraticForm.Basic
-import Mathlib.Tactic.NormNum
 
 namespace YXT.Axiomatic
 
-/-- Euclidean quadratic form on ℝ⁶: sum of squares. -/
+/-- Euclidean sum-of-squares form on ℝ⁶ (Mathlib QuadraticMap API). -/
 noncomputable def Q6 : QuadraticForm ℝ (Fin 6 → ℝ) :=
-  QuadraticForm.weightedSumSquares ℝ (fun _ : Fin 6 => (1 : ℝ))
+  QuadraticMap.weightedSumSquares ℝ (fun _ : Fin 6 => (1 : ℝ))
 
 /-- Cl₆(ℝ) as Mathlib Clifford algebra of Q6. -/
 noncomputable abbrev Cl6 : Type := CliffordAlgebra Q6

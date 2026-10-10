@@ -3,7 +3,7 @@ import Mathlib.Topology.Compactness.Compact
 
 namespace YXT.Axiomatic
 
-/-- Cosmic torus carrier: 64-fold product of unit circles ℝ/ℤ. -/
+/-- Cosmic torus: 64-fold product of unit circles ℝ/ℤ. -/
 def T64 : Type := Fin 64 → AddCircle (1 : ℝ)
 
 instance : TopologicalSpace T64 := Pi.topologicalSpace

@@ -20,28 +20,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install elan
-        run: |
-          curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf |
-            sh -s -- -y --default-toolchain none
-          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
-
-      - name: Show toolchain
-        run: |
-          cat lean-toolchain
-          lean --version
-          lake --version
-
-      - name: Lake update
-        run: lake update
-
-      - name: Mathlib cache
-        run: lake exe cache get || true
-
-      - name: Build
-        run: lake build
-
-      - name: On failure hint
-        if: failure()
-        run: |
-          echo "Copy from the first error: downward and send to Grok."
+      - name: Build with lean-action
+        uses: leanprover/lean-action@v1
+        with:
+          auto-config: true
+          lake-package-directory: .
