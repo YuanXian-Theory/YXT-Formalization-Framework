@@ -1,19 +1,19 @@
 # Progress
 
-## Latest (lattice + Haar)
+## Green stack
+- T64, Cl6, Cyclotomic85, PeriodMatrix interfaces
+- latticeRel ℤ-span with refl/symm/trans
+- haarT64 IsProbabilityMeasure
+- **srOperator = Haar average on C(T64,ℂ)** with idempotent + preserves const **proved**
+
+## Remaining axioms / gaps
 | Item | Status |
 |------|--------|
-| latticeRel | **ℤ-span of basis columns** (refl/symm/trans proved) |
-| CMAbelian32 | Quotient by real lattice relation |
-| haarT64 | Measure.pi + **IsProbabilityMeasure** instance |
-| omega_sq | still narrowed axiom (= -1) |
-
-## Carriers (Mathlib)
-- T64 = Fin 64 → UnitAddCircle
-- Cl6 = CliffordAlgebra Q6; iota6_sq proved
-- Cyclotomic85, φ(85)=64
+| omega_sq | axiom (= -1); helpers Q6_e6, iota6_sq proved |
+| generate_A body | still zero-class placeholder |
+| RBR positivity | axiom on standard block |
 
 ## Next
 1. omega anticommutation walk
-2. connect srOperator to Haar conditional expectation
-3. period matrix positivity
+2. richer period / polarization
+3. MindField L² fixed points using Haar
