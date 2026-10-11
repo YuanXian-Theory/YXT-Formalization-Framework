@@ -1,23 +1,19 @@
 # Progress
 
-## CI
-- Mathlib v4.26.0 green (T64, Cl6, Haar, CM interfaces)
-
-## omega / Cl6
+## Latest (lattice + Haar)
 | Item | Status |
 |------|--------|
-| Q6, Cl6 carrier | proved / Mathlib |
-| e6 frame, iota6, omega | defined |
-| Q6_e6 (‖eᵢ‖² = 1) | theorem |
-| iota6_sq (ι(eᵢ)² = 1) | theorem |
-| sign exponent 15 | theorem |
-| omega_sq = -1 | **narrowed axiom** (was ∨ ±1); anticommutation walk pending |
+| latticeRel | **ℤ-span of basis columns** (refl/symm/trans proved) |
+| CMAbelian32 | Quotient by real lattice relation |
+| haarT64 | Measure.pi + **IsProbabilityMeasure** instance |
+| omega_sq | still narrowed axiom (= -1) |
 
-## Haar / CM
-- haarUnit + haarT64 interface green
-- PeriodMatrix over ℂ, generate_A, RBR interface green
+## Carriers (Mathlib)
+- T64 = Fin 64 → UnitAddCircle
+- Cl6 = CliffordAlgebra Q6; iota6_sq proved
+- Cyclotomic85, φ(85)=64
 
 ## Next
-1. Anticommutation walk for omega_sq (remove last axiom)
-2. latticeRel → Submodule.span
-3. IsProbabilityMeasure on haarT64
+1. omega anticommutation walk
+2. connect srOperator to Haar conditional expectation
+3. period matrix positivity
