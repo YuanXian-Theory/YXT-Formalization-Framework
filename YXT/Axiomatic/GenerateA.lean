@@ -1,6 +1,5 @@
 import Mathlib.Data.Complex.Basic
 import Mathlib.Algebra.BigOperators.Group.Finset.Basic
-import Mathlib.Data.Fin.VecNotation
 import YXT.Axiomatic.T64
 import YXT.Axiomatic.Cl6
 import YXT.Axiomatic.Reduction35
@@ -15,8 +14,6 @@ instance : AddCommGroup Complex32 := inferInstance
 
 /--
 ℤ-span of the 32 basis columns of `L` inside ℂ³².
-A vector `v` lies in the span iff there are integer coefficients `c j` with
-  v i = ∑ j, ↑(c j) * L j i.
 -/
 def inLatticeSpan (L : LatticeBasis32) (v : Complex32) : Prop :=
   ∃ c : Fin 32 → ℤ, ∀ i : Fin 32, v i = ∑ j : Fin 32, (c j : ℂ) * L j i
@@ -29,21 +26,21 @@ theorem latticeRel_refl (L : LatticeBasis32) (x : Complex32) :
     latticeRel L x x := by
   refine ⟨fun _ => (0 : ℤ), ?_⟩
   intro i
-  simp [sub_self]
+  simp [Pi.sub_apply]
 
 theorem latticeRel_symm (L : LatticeBasis32) {x y : Complex32}
     (h : latticeRel L x y) : latticeRel L y x := by
   obtain ⟨c, hc⟩ := h
   refine ⟨fun j => -c j, ?_⟩
   intro i
-  have := hc i
-  simp only [Pi.sub_apply] at this ⊢
-  -- y - x = -(x - y)
+  have hi := hc i
+  simp only [Pi.sub_apply] at hi ⊢
+  -- (y - x) i = y i - x i = -(x i - y i)
   calc
-    (y - x) i = -((x - y) i) := by ring
-    _ = -(∑ j : Fin 32, (c j : ℂ) * L j i) := by rw [this]
+    y i - x i = -(x i - y i) := by abel
+    _ = -(∑ j : Fin 32, (c j : ℂ) * L j i) := by rw [hi]
     _ = ∑ j : Fin 32, ((-c j : ℤ) : ℂ) * L j i := by
-        simp [Finset.sum_neg_distrib, neg_mul]
+        simp [Finset.sum_neg_distrib, neg_mul, Int.cast_neg]
 
 theorem latticeRel_trans (L : LatticeBasis32) {x y z : Complex32}
     (hxy : latticeRel L x y) (hyz : latticeRel L y z) : latticeRel L x z := by
@@ -51,10 +48,12 @@ theorem latticeRel_trans (L : LatticeBasis32) {x y z : Complex32}
   obtain ⟨d, hd⟩ := hyz
   refine ⟨fun j => c j + d j, ?_⟩
   intro i
-  simp only [Pi.sub_apply] at hc hd ⊢
+  have hci := hc i
+  have hdi := hd i
+  simp only [Pi.sub_apply] at hci hdi ⊢
   calc
-    (x - z) i = (x - y) i + (y - z) i := by ring
-    _ = (∑ j, (c j : ℂ) * L j i) + (∑ j, (d j : ℂ) * L j i) := by rw [hc, hd]
+    x i - z i = (x i - y i) + (y i - z i) := by abel
+    _ = (∑ j, (c j : ℂ) * L j i) + (∑ j, (d j : ℂ) * L j i) := by rw [hci, hdi]
     _ = ∑ j, ((c j + d j : ℤ) : ℂ) * L j i := by
         simp [Finset.sum_add_distrib, add_mul, Int.cast_add]
 
@@ -71,22 +70,15 @@ def LatticeQuotient (L : LatticeBasis32) : Type := Quotient (latticeSetoid L)
 instance (L : LatticeBasis32) : Nonempty (LatticeQuotient L) :=
   ⟨Quotient.mk (latticeSetoid L) (fun _ => 0)⟩
 
-/-- Zero is always in the lattice span. -/
 theorem zero_inLatticeSpan (L : LatticeBasis32) :
     inLatticeSpan L (fun _ => 0) :=
   ⟨fun _ => 0, by intro i; simp⟩
 
-/-- CM abelian variety of dimension 32 (quotient ℂ³² / Λ). -/
 def CMAbelian32 : Type := LatticeQuotient cmLatticeFormal
 
 def cmAbelian32_zero : CMAbelian32 :=
   Quotient.mk (latticeSetoid cmLatticeFormal) (fun _ => 0)
 
-/--
-Generation map: (T⁶⁴, Cl₆) → CM abelian variety.
-**Epistemic status**: interface; currently constant at the zero class.
-Real path: stages 17–28 + period matrix from CM type.
--/
 def generate_A (_t : T64) (_c : Cl6) : CMAbelian32 := cmAbelian32_zero
 
 theorem generate_A_uses_stages :
