@@ -1,19 +1,23 @@
 # Progress
 
 ## CI
-- Pure-stdlib skeleton: green
-- Mathlib v4.26.0: green (T64 UnitAddCircle, Cl6 CliffordAlgebra, Cyclotomic85)
+- Mathlib v4.26.0 green (T64, Cl6, Haar, CM interfaces)
 
-## Wave 1–3 (this push)
+## omega / Cl6
+| Item | Status |
+|------|--------|
+| Q6, Cl6 carrier | proved / Mathlib |
+| e6 frame, iota6, omega | defined |
+| Q6_e6 (‖eᵢ‖² = 1) | theorem |
+| iota6_sq (ι(eᵢ)² = 1) | theorem |
+| sign exponent 15 | theorem |
+| omega_sq = -1 | **narrowed axiom** (was ∨ ±1); anticommutation walk pending |
 
-| Item | Status | Notes |
-|------|--------|-------|
-| 1 Haar | interface + Mathlib haar on UnitAddCircle; `haarT64` via `Measure.pi` | IsProbabilityMeasure on factor; product may need instance polish in CI |
-| 2 Cl6 ω² | `omega` defined as ∏ ι(eᵢ); `omega_sq` axiom (±1) | Expand to proof later |
-| 3 CM / period | Complex32, PeriodMatrix over ℂ, RBR axiom, generate_A + periodOfGenerated | Lattice span still True-relation placeholder |
+## Haar / CM
+- haarUnit + haarT64 interface green
+- PeriodMatrix over ℂ, generate_A, RBR interface green
 
-## Next candidates
-- Prove product Haar is probability (or pin Mathlib lemma)
-- Expand omega_sq without axiom
-- Replace latticeRel by Submodule.span ℤ
-- Wire Haar average into srOperator
+## Next
+1. Anticommutation walk for omega_sq (remove last axiom)
+2. latticeRel → Submodule.span
+3. IsProbabilityMeasure on haarT64
