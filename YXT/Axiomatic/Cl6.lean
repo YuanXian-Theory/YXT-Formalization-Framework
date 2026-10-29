@@ -43,7 +43,6 @@ theorem e6_isOrtho {i j : Fin 6} (hij : i ≠ j) :
   classical
   rw [QuadraticMap.isOrtho_def, Q6_e6 i, Q6_e6 j]
   simp only [Q6, e6, Pi.add_apply, QuadraticMap.weightedSumSquares_apply, one_smul]
-  -- (δₖᵢ + δₖⱼ)² = δₖᵢ + δₖⱼ when i ≠ j
   have hterm : ∀ k : Fin 6,
       ((if k = i then (1 : ℝ) else 0) + (if k = j then 1 else 0)) *
         ((if k = i then (1 : ℝ) else 0) + (if k = j then 1 else 0)) =
@@ -51,7 +50,6 @@ theorem e6_isOrtho {i j : Fin 6} (hij : i ≠ j) :
     intro k
     by_cases hki : k = i
     · subst hki
-      -- k = i, and i ≠ j ⇒ second indicator is 0
       rw [if_neg hij]
       norm_num
     · by_cases hkj : k = j
@@ -61,8 +59,11 @@ theorem e6_isOrtho {i j : Fin 6} (hij : i ≠ j) :
       · simp [hki, hkj]
   simp_rw [hterm]
   rw [Finset.sum_add_distrib]
-  -- ∑ δₖᵢ + ∑ δₖⱼ = 1 + 1
-  simp only [Finset.sum_ite_eq, Finset.mem_univ, ↓reduceIte]
+  have hi : (∑ k : Fin 6, if k = i then (1 : ℝ) else 0) = 1 := by
+    simp [Finset.sum_ite_eq']
+  have hj : (∑ k : Fin 6, if k = j then (1 : ℝ) else 0) = 1 := by
+    simp [Finset.sum_ite_eq']
+  rw [hi, hj]
 
 /-- Generator squares: ι(eᵢ)² = 1. -/
 theorem iota6_sq (i : Fin 6) : iota6 i * iota6 i = (1 : Cl6) := by
