@@ -39,13 +39,15 @@ theorem omegaBlock_diag (i : Fin 32) : omegaBlock i i = 1 := by simp
 theorem omegaBlock_off {i j : Fin 32} (hij : i ≠ j) : omegaBlock i j = 0 := by
   simp [hij]
 
-/-- Identity block is Hermitian (conjugate transpose equals itself over ℂ with real entries). -/
-theorem omegaBlock_isHermitian :
-    omegaBlock.conjTranspose = omegaBlock := by
+/-- Transpose of the formal identity block is itself. -/
+theorem omegaBlock_transpose :
+    omegaBlock.transpose = omegaBlock := by
   ext i j
-  simp [Matrix.conjTranspose_apply, Complex.conj_ite]
-  split_ifs with h
-  · rfl
+  simp [Matrix.transpose_apply]
+  split_ifs with h₁ h₂
+  · exact h₂.symm ▸ h₁ ▸ rfl
+  · exact False.elim (h₂ h₁.symm)
+  · exact False.elim (h₁ h₂.symm)
   · rfl
 
 noncomputable def periodMapStandard : PeriodMatrix := omegaBlock
