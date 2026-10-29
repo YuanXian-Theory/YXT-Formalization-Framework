@@ -42,9 +42,8 @@ theorem e6_isOrtho {i j : Fin 6} (hij : i ≠ j) :
     Q6.IsOrtho (e6 i) (e6 j) := by
   classical
   rw [QuadraticMap.isOrtho_def, Q6_e6 i, Q6_e6 j]
-  -- Goal: Q6 (e6 i + e6 j) = 1 + 1
   simp only [Q6, e6, Pi.add_apply, QuadraticMap.weightedSumSquares_apply, one_smul]
-  -- Each coordinate: (δₖᵢ + δₖⱼ)² equals δₖᵢ + δₖⱼ when i ≠ j
+  -- (δₖᵢ + δₖⱼ)² = δₖᵢ + δₖⱼ when i ≠ j
   have hterm : ∀ k : Fin 6,
       ((if k = i then (1 : ℝ) else 0) + (if k = j then 1 else 0)) *
         ((if k = i then (1 : ℝ) else 0) + (if k = j then 1 else 0)) =
@@ -52,14 +51,18 @@ theorem e6_isOrtho {i j : Fin 6} (hij : i ≠ j) :
     intro k
     by_cases hki : k = i
     · subst hki
-      simp [Ne.symm hij]
+      -- k = i, and i ≠ j ⇒ second indicator is 0
+      rw [if_neg hij]
+      norm_num
     · by_cases hkj : k = j
       · subst hkj
-        simp [hki]
+        rw [if_neg hki]
+        norm_num
       · simp [hki, hkj]
   simp_rw [hterm]
   rw [Finset.sum_add_distrib]
-  simp [Finset.sum_ite_eq]
+  -- ∑ δₖᵢ + ∑ δₖⱼ = 1 + 1
+  simp only [Finset.sum_ite_eq, Finset.mem_univ, ↓reduceIte]
 
 /-- Generator squares: ι(eᵢ)² = 1. -/
 theorem iota6_sq (i : Fin 6) : iota6 i * iota6 i = (1 : Cl6) := by
@@ -81,9 +84,8 @@ theorem neg_one_pow_fifteen : (-1 : ℤ) ^ 15 = -1 := by decide
 ω² = −1.
 
 **Epistemic status**: classical formula ω² = (−1)^{n(n-1)/2} for Euclidean Clₙ
-with n=6 gives (−1)¹⁵ = −1. Full inductive anticommutation walk over prefix
-products is future work; supporting lemmas `e6_isOrtho`, `iota6_sq`,
-`iota6_anticomm` are proved.
+with n=6 gives (−1)¹⁵ = −1. Full inductive anticommutation walk is future work;
+supporting lemmas `e6_isOrtho`, `iota6_sq`, `iota6_anticomm` are proved.
 -/
 axiom omega_sq : omega * omega = (-1 : Cl6)
 
