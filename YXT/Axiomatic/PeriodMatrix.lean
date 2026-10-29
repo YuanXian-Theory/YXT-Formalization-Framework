@@ -31,11 +31,30 @@ theorem latticeRealRank_eq : latticeRealRank = 2 * 32 := by decide
 noncomputable def omegaBlock : PeriodMatrix :=
   Matrix.of fun i j => if i = j then (1 : ℂ) else 0
 
+@[simp] theorem omegaBlock_apply (i j : Fin 32) :
+    omegaBlock i j = if i = j then (1 : ℂ) else 0 := rfl
+
+theorem omegaBlock_diag (i : Fin 32) : omegaBlock i i = 1 := by simp
+
+theorem omegaBlock_off {i j : Fin 32} (hij : i ≠ j) : omegaBlock i j = 0 := by
+  simp [hij]
+
+/-- Identity block is Hermitian (conjugate transpose equals itself over ℂ with real entries). -/
+theorem omegaBlock_isHermitian :
+    omegaBlock.conjTranspose = omegaBlock := by
+  ext i j
+  simp [Matrix.conjTranspose_apply, Complex.conj_ite]
+  split_ifs with h
+  · rfl
+  · rfl
+
 noncomputable def periodMapStandard : PeriodMatrix := omegaBlock
 
 noncomputable def periodMap (_L : LatticeBasis32) : PeriodMatrix := periodMapStandard
 
 noncomputable def periodFromCMType (_τ : CMTypeChoice) : PeriodMatrix := periodMapStandard
+
+theorem periodMapStandard_eq_omegaBlock : periodMapStandard = omegaBlock := rfl
 
 /-- Riemann bilinear relations interface (positivity / symmetry to be filled). -/
 axiom RiemannBilinearRelations : PeriodMatrix → Prop
