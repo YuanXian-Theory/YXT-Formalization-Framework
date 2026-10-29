@@ -39,17 +39,6 @@ theorem omegaBlock_diag (i : Fin 32) : omegaBlock i i = 1 := by simp
 theorem omegaBlock_off {i j : Fin 32} (hij : i ≠ j) : omegaBlock i j = 0 := by
   simp [hij]
 
-/-- Transpose of the formal identity block is itself. -/
-theorem omegaBlock_transpose :
-    omegaBlock.transpose = omegaBlock := by
-  ext i j
-  simp [Matrix.transpose_apply]
-  split_ifs with h₁ h₂
-  · exact h₂.symm ▸ h₁ ▸ rfl
-  · exact False.elim (h₂ h₁.symm)
-  · exact False.elim (h₁ h₂.symm)
-  · rfl
-
 noncomputable def periodMapStandard : PeriodMatrix := omegaBlock
 
 noncomputable def periodMap (_L : LatticeBasis32) : PeriodMatrix := periodMapStandard
